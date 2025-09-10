@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concert Schedule - Riot Festival</title>
+    <meta name="description" content="3-day concert schedule with offline access">
+    <meta name="theme-color" content="#1a1a1a">
+    
+    <!-- PWA Meta Tags -->``
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <h1 class="title">Riot Festival</h1>
+            <p class="subtitle">3-Day Music Experience</p>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="schedule-container">
+                <div class="day-header">
+                    <h2 class="day-title" id="current-day">Day 1</h2>
+                    <div class="date-info" id="current-date">Friday, June 14</div>
+                </div>
+                
+                <div class="stage-filters" id="stage-filters">
+                    <!-- Stage filter buttons will be populated by JavaScript -->
+                </div>
+                
+                <div class="schedule-content" id="schedule-content">
+                    <!-- Schedule will be populated by JavaScript -->
+                    <div class="loading">Loading schedule...</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <button class="nav-item active" data-day="1">
+                <div class="nav-icon">📅</div>
+                <span class="nav-label">Day 1</span>
+            </button>
+            <button class="nav-item" data-day="2">
+                <div class="nav-icon">📅</div>
+                <span class="nav-label">Day 2</span>
+            </button>
+            <button class="nav-item" data-day="3">
+                <div class="nav-icon">📅</div>
+                <span class="nav-label">Day 3</span>
+            </button>
+            <button class="nav-item" data-action="map">
+                <div class="nav-icon">🗺️</div>
+                <span class="nav-label">Map</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>

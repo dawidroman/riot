@@ -1,0 +1,25 @@
+{
+  "name": "riot-festival-schedule",
+  "version": "1.0.0",
+  "description": "A Progressive Web App for displaying a 3-day concert schedule with offline functionality",
+  "main": "index.html",
+  "scripts": {
+    "dev": "wrangler pages dev .",
+    "deploy": "wrangler pages deploy .",
+    "deploy:staging": "wrangler pages deploy . --env staging",
+    "deploy:production": "wrangler pages deploy . --env production"
+  },
+  "keywords": [
+    "pwa",
+    "concert",
+    "schedule",
+    "festival",
+    "offline",
+    "cloudflare"
+  ],
+  "author": "Riot Festival",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
