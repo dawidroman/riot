@@ -88,25 +88,65 @@ class ConcertScheduleApp {
                 sessionStorage.setItem('install-prompt-dismissed', 'true');
             });
         }
+
+        // For testing: Show prompt after 5 seconds if no beforeinstallprompt event
+        setTimeout(() => {
+            if (!this.deferredPrompt && !sessionStorage.getItem('install-prompt-dismissed')) {
+                console.log('No beforeinstallprompt event received, showing test prompt');
+                this.showTestInstallPrompt();
+            }
+        }, 5000);
+    }
+
+    showTestInstallPrompt() {
+        console.log('Showing test install prompt');
+        const prompt = document.getElementById('install-prompt');
+        if (prompt) {
+            // Update the install button to show it's a test
+            const installBtn = document.getElementById('install-btn');
+            if (installBtn) {
+                installBtn.textContent = 'Add to Home Screen';
+                installBtn.onclick = () => {
+                    this.showNotification('On iOS: Tap Share → Add to Home Screen. On Android: Look for install option in browser menu.', 'info');
+                    this.hideInstallPrompt();
+                };
+            }
+            
+            setTimeout(() => {
+                prompt.classList.add('show');
+            }, 1000);
+        }
     }
 
     showInstallPrompt() {
+        console.log('showInstallPrompt called');
+        console.log('Dismissed this session:', sessionStorage.getItem('install-prompt-dismissed'));
+        console.log('Already installed:', window.matchMedia('(display-mode: standalone)').matches);
+        console.log('Deferred prompt available:', !!this.deferredPrompt);
+
         // Don't show if already dismissed this session
         if (sessionStorage.getItem('install-prompt-dismissed')) {
+            console.log('Not showing: already dismissed this session');
             return;
         }
 
         // Don't show if already installed
         if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Not showing: already installed');
             return;
         }
 
         const prompt = document.getElementById('install-prompt');
-        if (prompt && this.deferredPrompt) {
+        console.log('Install prompt element found:', !!prompt);
+        
+        if (prompt) {
             // Show with a slight delay for better UX
             setTimeout(() => {
+                console.log('Showing install prompt');
                 prompt.classList.add('show');
             }, 2000);
+        } else {
+            console.log('Install prompt element not found');
         }
     }
 
@@ -834,6 +874,27 @@ document.addEventListener('DOMContentLoaded', () => {
             window.concertApp.saveFavorites();
             window.concertApp.renderSchedule();
             console.log('Favorites cleared');
+        }
+    };
+    
+    // Add global function to test install prompt
+    window.testInstallPrompt = () => {
+        if (window.concertApp) {
+            // Clear any dismissal flags
+            sessionStorage.removeItem('install-prompt-dismissed');
+            // Show the test prompt
+            window.concertApp.showTestInstallPrompt();
+        }
+    };
+    
+    // Add global function to check install prompt status
+    window.checkInstallPrompt = () => {
+        if (window.concertApp) {
+            console.log('Install prompt status:');
+            console.log('- Deferred prompt available:', !!window.concertApp.deferredPrompt);
+            console.log('- Dismissed this session:', !!sessionStorage.getItem('install-prompt-dismissed'));
+            console.log('- Already installed:', window.matchMedia('(display-mode: standalone)').matches);
+            console.log('- User agent:', navigator.userAgent);
         }
     };
 });
