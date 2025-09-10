@@ -7,6 +7,7 @@ class ConcertScheduleApp {
         this.availableStages = new Set();
         this.timeUpdateInterval = null;
         this.favorites = new Set();
+        this.deferredPrompt = null;
         this.days = [
             { id: 1, name: 'Day 1', date: 'Friday, June 14' },
             { id: 2, name: 'Day 2', date: 'Saturday, June 15' },
@@ -19,6 +20,7 @@ class ConcertScheduleApp {
     init() {
         this.loadFavorites();
         this.setupEventListeners();
+        this.setupInstallPrompt();
         this.loadScheduleData();
         this.startTimeUpdates();
         this.registerServiceWorker();
@@ -48,6 +50,94 @@ class ConcertScheduleApp {
                 this.resumeTimeUpdates();
             }
         });
+    }
+
+    setupInstallPrompt() {
+        // Listen for the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('PWA install prompt available');
+            // Prevent the mini-infobar from appearing on mobile
+            e.preventDefault();
+            // Stash the event so it can be triggered later
+            this.deferredPrompt = e;
+            // Show our custom install prompt
+            this.showInstallPrompt();
+        });
+
+        // Listen for the appinstalled event
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA was installed');
+            this.hideInstallPrompt();
+            this.showNotification('App installed successfully!', 'success');
+        });
+
+        // Setup install prompt buttons
+        const installBtn = document.getElementById('install-btn');
+        const dismissBtn = document.getElementById('install-dismiss');
+
+        if (installBtn) {
+            installBtn.addEventListener('click', () => {
+                this.installApp();
+            });
+        }
+
+        if (dismissBtn) {
+            dismissBtn.addEventListener('click', () => {
+                this.hideInstallPrompt();
+                // Don't show again for this session
+                sessionStorage.setItem('install-prompt-dismissed', 'true');
+            });
+        }
+    }
+
+    showInstallPrompt() {
+        // Don't show if already dismissed this session
+        if (sessionStorage.getItem('install-prompt-dismissed')) {
+            return;
+        }
+
+        // Don't show if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            return;
+        }
+
+        const prompt = document.getElementById('install-prompt');
+        if (prompt && this.deferredPrompt) {
+            // Show with a slight delay for better UX
+            setTimeout(() => {
+                prompt.classList.add('show');
+            }, 2000);
+        }
+    }
+
+    hideInstallPrompt() {
+        const prompt = document.getElementById('install-prompt');
+        if (prompt) {
+            prompt.classList.remove('show');
+        }
+    }
+
+    async installApp() {
+        if (!this.deferredPrompt) {
+            return;
+        }
+
+        // Show the install prompt
+        this.deferredPrompt.prompt();
+
+        // Wait for the user to respond to the prompt
+        const { outcome } = await this.deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+
+        // Clear the deferredPrompt
+        this.deferredPrompt = null;
+
+        // Hide our custom install prompt
+        this.hideInstallPrompt();
+
+        if (outcome === 'accepted') {
+            this.showNotification('Installing app...', 'info');
+        }
     }
 
     async loadScheduleData() {
