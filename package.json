@@ -20,6 +20,9 @@
   "author": "Riot Festival",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "serve": "^14.2.1",
+    "live-server": "^1.2.2",
+    "prettier": "^3.0.3",
+    "lighthouse": "^11.4.0"
   }
 }
