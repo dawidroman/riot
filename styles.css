@@ -576,11 +576,15 @@ body {
     transition: all 0.3s ease;
     max-width: 400px;
     margin: 0 auto;
+    pointer-events: none;
+    visibility: hidden;
 }
 
 .install-prompt.show {
     transform: translateY(0);
     opacity: 1;
+    pointer-events: auto;
+    visibility: visible;
 }
 
 .install-prompt-content {

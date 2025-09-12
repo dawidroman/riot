@@ -188,6 +188,7 @@ class ConcertScheduleApp {
         const prompt = document.getElementById('install-prompt');
         if (prompt) {
             prompt.classList.remove('show');
+            // The CSS will handle pointer-events and visibility
         }
     }
 
