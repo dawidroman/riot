@@ -734,6 +734,17 @@ body {
     to { transform: rotate(360deg); }
 }
 
+@keyframes fabPulse {
+    0%, 100% {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 0 rgba(255, 107, 53, 0.7);
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.35), 0 0 0 10px rgba(255, 107, 53, 0);
+        transform: scale(1.05);
+    }
+}
+
 /* Mobile About Page */
 @media (max-width: 768px) {
     .about-page {
@@ -801,6 +812,7 @@ body {
     transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
     opacity: 0;
     pointer-events: none;
+    animation: fabPulse 2s ease-in-out infinite;
 }
 
 .fab-now-playing.show {
@@ -811,6 +823,7 @@ body {
 .fab-now-playing:hover {
     background: var(--secondary-color);
     transform: translateY(-2px);
+    animation: none; /* Stop pulsing on hover */
 }
 
 @media (max-width: 768px) {

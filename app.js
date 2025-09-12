@@ -175,16 +175,16 @@ class ConcertScheduleApp {
             this.renderSchedule();
             console.log('Schedule data loaded successfully');
             
-            // Now trigger the initial auto-scroll after data is loaded
-            this.updateNowPlayingStatus(true); // do the initial scroll once
+            // Update now playing status without auto-scroll
+            this.updateNowPlayingStatus(false);
         } catch (error) {
             console.error('Error loading schedule data:', error);
             this.loadSampleData(); // Fallback to sample data
             this.renderSchedule();
             this.showNotification('Using sample data - check console for details', 'warning');
             
-            // Trigger auto-scroll for fallback data too
-            this.updateNowPlayingStatus(true);
+            // Update now playing status without auto-scroll
+            this.updateNowPlayingStatus(false);
         }
     }
 
