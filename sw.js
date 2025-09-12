@@ -11,6 +11,14 @@ const STATIC_FILES = [
     '/app.js',
     '/manifest.json',
     '/sample-schedule.csv',
+    '/icons/icon-72x72.svg',
+    '/icons/icon-96x96.svg',
+    '/icons/icon-128x128.svg',
+    '/icons/icon-144x144.svg',
+    '/icons/icon-152x152.svg',
+    '/icons/icon-192x192.svg',
+    '/icons/icon-384x384.svg',
+    '/icons/icon-512x512.svg',
     'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
 ];
 
