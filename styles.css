@@ -706,6 +706,11 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
+    /* Ensure it respects mobile browser UI */
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height for mobile */
+    width: 100vw;
+    width: 100dvw; /* Dynamic viewport width for mobile */
 }
 
 .about-page.show {
@@ -720,8 +725,11 @@ body {
     max-width: 600px;
     width: 100%;
     max-height: 90vh;
+    max-height: 90dvh; /* Dynamic viewport height for mobile */
     overflow-y: auto;
     position: relative;
+    /* Ensure content doesn't bleed under browser UI */
+    margin: 0.5rem;
 }
 
 .about-header {
@@ -858,15 +866,25 @@ body {
 @media (max-width: 768px) {
     .about-page {
         padding: 0.5rem;
+        /* Use safe area insets for mobile browsers */
+        padding-top: max(0.5rem, env(safe-area-inset-top));
+        padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+        padding-left: max(0.5rem, env(safe-area-inset-left));
+        padding-right: max(0.5rem, env(safe-area-inset-right));
     }
     
     .about-content {
-        max-height: 95vh;
+        max-height: calc(100vh - 2rem);
+        max-height: calc(100dvh - 2rem); /* Dynamic viewport height minus padding */
+        margin: 0;
+        border-radius: 0.75rem;
     }
     
     .about-header {
         padding: 1rem 1rem 0;
         margin-bottom: 1rem;
+        /* Add safe area padding for header */
+        padding-top: max(1rem, env(safe-area-inset-top) + 0.5rem);
     }
     
     .about-header h2 {
@@ -875,6 +893,8 @@ body {
     
     .about-body {
         padding: 0 1rem 1rem;
+        /* Add safe area padding for bottom */
+        padding-bottom: max(1rem, env(safe-area-inset-bottom) + 0.5rem);
     }
     
     .about-section {
