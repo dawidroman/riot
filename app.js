@@ -87,53 +87,24 @@ class ConcertScheduleApp {
     }
 
     setupInstallPrompt() {
-        console.log('Setting up install prompt...');
-        console.log('PWA criteria check:');
-        console.log('- HTTPS:', location.protocol === 'https:');
-        console.log('- Service Worker:', 'serviceWorker' in navigator);
-        console.log('- Manifest:', document.querySelector('link[rel="manifest"]') !== null);
-        console.log('- Standalone mode:', window.matchMedia('(display-mode: standalone)').matches);
-
         // Listen for the beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('🎉 PWA install prompt available!', e);
-            // Prevent the mini-infobar from appearing on mobile
+            console.log('PWA install prompt available');
             e.preventDefault();
-            // Stash the event so it can be triggered later
-            this.deferredPrompt = e;
-            // Show our custom install prompt
+            deferredPrompt = e;
+            // Show install button or banner here
             this.showInstallPromotion();
         });
 
         // Listen for the appinstalled event
         window.addEventListener('appinstalled', () => {
-            console.log('✅ PWA was installed');
-            this.dismissBanner();
+            console.log('PWA was installed');
+            dismissBanner();
             this.showNotification('App installed successfully!', 'success');
         });
-
-        // For testing: Show prompt after 3 seconds if no beforeinstallprompt event
-        setTimeout(() => {
-            if (!this.deferredPrompt && !sessionStorage.getItem('install-prompt-dismissed')) {
-                console.log('⚠️ No beforeinstallprompt event received, showing fallback prompt');
-                this.showInstallPromotion();
-            }
-        }, 3000);
     }
 
     showInstallPromotion() {
-        // Don't show if already dismissed this session
-        if (sessionStorage.getItem('install-prompt-dismissed')) {
-            console.log('Not showing: already dismissed this session');
-            return;
-        }
-
-        // Don't show if already installed
-        if (window.matchMedia('(display-mode: standalone)').matches) {
-            console.log('Not showing: already installed');
-            return;
-        }
-
         // Create install banner
         const banner = document.createElement('div');
         banner.style.cssText = `
@@ -161,60 +132,13 @@ class ConcertScheduleApp {
                 <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">Get quick access and use offline!</p>
             </div>
             <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
-                <button onclick="window.concertApp.installApp()" style="background: var(--primary-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">Install</button>
-                <button onclick="window.concertApp.dismissBanner()" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0.5rem; font-size: 1.2rem;">✕</button>
+                <button onclick="installApp()" style="background: var(--primary-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">Install</button>
+                <button onclick="dismissBanner()" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0.5rem; font-size: 1.2rem;">✕</button>
             </div>
         `;
         document.body.appendChild(banner);
     }
 
-    dismissBanner() {
-        const banner = document.querySelector('div[style*="position: fixed"]');
-        if (banner) {
-            banner.remove();
-            // Don't show again for this session
-            sessionStorage.setItem('install-prompt-dismissed', 'true');
-        }
-    }
-
-    async installApp() {
-        console.log('Install button clicked');
-        console.log('Deferred prompt available:', !!this.deferredPrompt);
-        
-        if (!this.deferredPrompt) {
-            console.log('No deferred prompt available, showing manual instructions');
-            // Show manual installation instructions
-            this.showNotification('On iOS: Tap Share → Add to Home Screen. On Android: Look for install option in browser menu.', 'info');
-            this.dismissBanner();
-            return;
-        }
-
-        try {
-            console.log('Showing system install prompt...');
-            // Show the install prompt
-            this.deferredPrompt.prompt();
-
-            // Wait for the user to respond to the prompt
-            const { outcome } = await this.deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
-
-            // Clear the deferredPrompt
-            this.deferredPrompt = null;
-
-            // Hide our custom install prompt
-            this.dismissBanner();
-
-            if (outcome === 'accepted') {
-                this.showNotification('Installing app...', 'info');
-            } else {
-                this.showNotification('Installation cancelled', 'info');
-            }
-        } catch (error) {
-            console.error('Error during install:', error);
-            this.showNotification('Installation failed. Please try manual installation.', 'error');
-            this.dismissBanner();
-        }
-    }
 
     async loadScheduleData() {
         try {
@@ -960,6 +884,31 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// Global functions for PWA install (like bean app)
+let deferredPrompt;
+
+function installApp() {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+        });
+    }
+    dismissBanner();
+}
+
+function dismissBanner() {
+    const banner = document.querySelector('div[style*="position: fixed"]');
+    if (banner) {
+        banner.remove();
+    }
+}
 
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
