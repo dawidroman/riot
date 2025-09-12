@@ -62,6 +62,7 @@ class ConcertScheduleApp {
         // About page buttons
         const closeAboutBtn = document.getElementById('close-about');
         const forceRefreshBtn = document.getElementById('force-refresh-btn');
+        const clearFavoritesBtn = document.getElementById('clear-favorites-btn');
 
         if (closeAboutBtn) {
             closeAboutBtn.addEventListener('click', () => {
@@ -72,6 +73,12 @@ class ConcertScheduleApp {
         if (forceRefreshBtn) {
             forceRefreshBtn.addEventListener('click', () => {
                 this.forceRefresh();
+            });
+        }
+
+        if (clearFavoritesBtn) {
+            clearFavoritesBtn.addEventListener('click', () => {
+                this.clearFavorites();
             });
         }
 
@@ -797,9 +804,13 @@ class ConcertScheduleApp {
 
             // Clear localStorage (except favorites)
             const favorites = localStorage.getItem('riot-festival-favorites');
+            const favoritesData = localStorage.getItem('riot-festival-favorites-data');
             localStorage.clear();
             if (favorites) {
                 localStorage.setItem('riot-festival-favorites', favorites);
+            }
+            if (favoritesData) {
+                localStorage.setItem('riot-festival-favorites-data', favoritesData);
             }
 
             // Clear sessionStorage
@@ -875,6 +886,17 @@ class ConcertScheduleApp {
             } catch (error) {
                 console.log('Service Worker registration failed:', error);
             }
+        }
+    }
+
+    clearFavorites() {
+        // Show confirmation dialog
+        if (confirm('Are you sure you want to clear all favorites? This action cannot be undone.')) {
+            this.favorites.clear();
+            this.saveFavorites();
+            this.renderSchedule();
+            this.showNotification('All favorites cleared', 'success');
+            console.log('Favorites cleared');
         }
     }
 }
