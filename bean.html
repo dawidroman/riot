@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bean - Fine Dining Omakase Experience | Chicago</title>
+    <meta name="description" content="Experience the art of omakase at The Bean, Chicago's most exclusive sushi destination. Only 12 seats available for an unforgettable culinary journey.">
+    <meta name="keywords" content="omakase, sushi, fine dining, Chicago, restaurant, chef's choice, exclusive dining">
+    <meta name="author" content="The Bean Restaurant">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://thebeanrestaurant.com/" />
+    <meta property="og:title" content="The Bean - Fine Dining Omakase Experience" />
+    <meta property="og:description" content="Experience the art of omakase at The Bean, Chicago's most exclusive sushi destination." />
+    <meta property="og:image" content="https://thebeanrestaurant.com/media/bar.png" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://thebeanrestaurant.com/" />
+    <meta property="twitter:title" content="The Bean - Fine Dining Omakase Experience" />
+    <meta property="twitter:description" content="Experience the art of omakase at The Bean, Chicago's most exclusive sushi destination." />
+    <meta property="twitter:image" content="https://thebeanrestaurant.com/media/bar.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="media/thebeanlogo.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/thebeanlogo.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#bfa76f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="The Bean">
+    <link rel="apple-touch-icon" href="https://thebeanrestaurant.com/media/thebeanlogo.png">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "The Bean",
+        "description": "An exclusive omakase sushi experience in Chicago",
+        "url": "https://thebeanrestaurant.com",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "201 E Randolph St",
+            "addressLocality": "Chicago",
+            "addressRegion": "IL",
+            "postalCode": "60602",
+            "addressCountry": "US"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 41.8781,
+            "longitude": -87.6298
+        },
+        "openingHours": "Mo-Su 18:00-22:00",
+        "priceRange": "$$$",
+        "servesCuisine": ["Japanese", "Sushi", "Omakase"],
+        "hasMenu": "https://thebeanrestaurant.com/menu"
+    }
+    </script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navigation">
+        <div class="nav-content">
+            <a href="#hero" class="nav-logo">The Bean</a>
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#reservation" class="nav-link">Reservations</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero" class="hero">
+        <img src="media/bar.png" 
+             alt="Elegant sushi bar with intimate seating" 
+             class="hero-bg"
+             loading="eager">
+        <div class="hero-content animate-fade-up">
+            <h1>The Bean</h1>
+            <p class="hero-subtitle">An intimate omakase experience within the iconic Cloud Gate</p>
+            <a href="#reservation" class="btn" style="margin-top: 2rem;">Reserve Your Seat</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="about">
+            <h2 class="section-title">About Us</h2>
+            <p class="about-text">
+                Hidden inside Chicago's iconic Cloud Gate sculpture—known as The Bean—twelve seats await those who seek more than just a meal. 
+                The Bean is a journey, not a destination. Each evening, our Chef orchestrates a symphony of flavors, 
+                surrendering to the unknown and letting each course reveal itself in time. Our philosophy is simple: 
+                trust the Chef, embrace the moment, and let the ingredients tell their story.
+            </p>
+            <div class="stats-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 3rem;">
+                <div class="stat-item text-center">
+                    <h3 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">12</h3>
+                    <p style="color: var(--text-secondary);">Exclusive Seats</p>
+                </div>
+                <div class="stat-item text-center">
+                    <h3 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">15</h3>
+                    <p style="color: var(--text-secondary);">Courses Per Evening</p>
+                </div>
+                <div class="stat-item text-center">
+                    <h3 style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 0.5rem;">3</h3>
+                    <p style="color: var(--text-secondary);">Hours of Experience</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="section">
+        <h2 class="section-title">Our Menu</h2>
+        <div class="menu-grid">
+            <div class="menu-item animate-fade-up" style="animation-delay: 0.1s;">
+                <h3>Omakase</h3>
+                <p>Seasonal selections, chef's choice. Each piece, a carefully crafted secret. Our signature experience featuring the finest ingredients flown in daily from Tokyo's Tsukiji Market.</p>
+            </div>
+            <div class="menu-item animate-fade-up" style="animation-delay: 0.2s;">
+                <h3>Sashimi</h3>
+                <p>Pristine cuts, fleeting flavors. The ocean, reimagined through the lens of tradition and innovation. Each slice tells a story of origin and craftsmanship.</p>
+            </div>
+            <div class="menu-item animate-fade-up" style="animation-delay: 0.3s;">
+                <h3>Nigiri</h3>
+                <p>Rice and fish, in perfect harmony. Minimal, mysterious, and utterly transcendent. Each piece is a meditation on balance and simplicity.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="section">
+        <div class="reservation">
+            <h2>Reservations</h2>
+            <p>Due to the exclusive nature of our seating, reservations are essential. Please select a date, time, and party size to check availability. We recommend booking 2-3 months in advance.</p>
+            
+            <form class="reservation-form" id="reservation-form" autocomplete="off" novalidate>
+                <div class="form-group">
+                    <input type="date" 
+                           id="reservation-date" 
+                           class="form-control" 
+                           required 
+                           aria-label="Select reservation date">
+                </div>
+                
+                <div class="form-group">
+                    <select id="reservation-time" class="form-control" required aria-label="Select reservation time">
+                        <option value="" disabled selected>Select Time</option>
+                        <option value="18:00">6:00 PM</option>
+                        <option value="18:30">6:30 PM</option>
+                        <option value="19:00">7:00 PM</option>
+                        <option value="19:30">7:30 PM</option>
+                        <option value="20:00">8:00 PM</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <select id="reservation-party" class="form-control" required aria-label="Select party size">
+                        <option value="" disabled selected>Party Size</option>
+                        <option value="1">1 Guest</option>
+                        <option value="2">2 Guests</option>
+                        <option value="3">3 Guests</option>
+                        <option value="4">4 Guests</option>
+                        <option value="5">5 Guests</option>
+                        <option value="6">6 Guests</option>
+                        <option value="7">7 Guests</option>
+                        <option value="8">8 Guests</option>
+                        <option value="9">9 Guests</option>
+                        <option value="10">10 Guests</option>
+                        <option value="11">11 Guests</option>
+                        <option value="12">12 Guests</option>
+                    </select>
+                </div>
+                
+                <button type="button" id="check-availability" class="btn">
+                    <span class="btn-text">Find a Table</span>
+                    <div class="spinner" id="loading-spinner"></div>
+                </button>
+                
+                <div id="availability-message" class="message" style="display: none;"></div>
+            </form>
+            
+            <div class="policy-box" style="margin-top: 2rem; padding: 1.5rem; background: var(--bg-glass); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--border-glass); border-radius: var(--border-radius-sm);">
+                <h4 style="color: var(--primary-color); margin-bottom: 1rem; font-size: 1.1rem; font-weight: 600;">Reservation Policy</h4>
+                <ul style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.7; margin: 0; padding-left: 1.2rem;">
+                    <li style="margin-bottom: 0.5rem;">Reservations required for all guests</li>
+                    <li style="margin-bottom: 0.5rem;">24-hour cancellation policy</li>
+                    <li style="margin-bottom: 0.5rem;">Smart casual dress code</li>
+                    <li style="margin-bottom: 0;">No substitutions or modifications to the omakase menu</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <h2 class="section-title">Guest Experiences</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial animate-fade-up" style="animation-delay: 0.1s;">
+                <p class="testimonial-text">
+                    "An absolutely transcendent experience. The Chef's omakase was like watching a master painter at work. 
+                    Each course was more beautiful than the last, and the flavors were beyond anything I've ever tasted."
+                </p>
+            </div>
+            <div class="testimonial animate-fade-up" style="animation-delay: 0.2s;">
+                <p class="testimonial-text">
+                    "The Bean is Chicago's best-kept secret. The intimate setting, the attention to detail, and the 
+                    sheer artistry of each dish makes this worth every penny. A truly unforgettable evening."
+                </p>
+            </div>
+            <div class="testimonial animate-fade-up" style="animation-delay: 0.3s;">
+                <p class="testimonial-text">
+                    "I've been to omakase restaurants around the world, and The Bean stands among the very best. 
+                    The combination of traditional technique and modern innovation is simply perfect."
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <h2 class="section-title">Visit Us</h2>
+        <div class="contact-container" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem;">
+            <div class="contact-info">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Location</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    201 E Randolph St<br>
+                    Chicago, IL 60602<br>
+                    United States
+                </p>
+                
+                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Hours</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Tuesday - Sunday<br>
+                    6:00 PM - 10:00 PM<br>
+                    Closed Mondays
+                </p>
+                
+                <h3 style="color: var(--primary-color); margin: 2rem 0 1rem;">Contact</h3>
+                <p style="color: var(--text-secondary); line-height: 1.8;">
+                    Email: info@thebeanrestaurant.com<br>
+                    For press inquiries: press@thebeanrestaurant.com
+                </p>
+            </div>
+            
+            <div class="contact-form">
+                <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Send us a Message</h3>
+                <form class="contact-form" style="display: flex; flex-direction: column; gap: 1rem;">
+                    <input type="text" placeholder="Your Name" class="form-control" required>
+                    <input type="email" placeholder="Your Email" class="form-control" required>
+                    <textarea placeholder="Your Message" class="form-control" rows="4" required></textarea>
+                    <button type="submit" class="btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <img src="media/thebeanlogo.png" 
+                 alt="The Bean logo" 
+                 class="footer-logo">
+            <p class="footer-text">&copy; 2025 The Bean. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/reservation.js"></script>
+    <script>
+        // Service Worker Registration
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch(registrationError => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // PWA Install Prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            // Show install button or banner here
+            showInstallPromotion();
+        });
+
+        function showInstallPromotion() {
+            // Create install banner
+            const banner = document.createElement('div');
+            banner.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 20px;
+                right: 20px;
+                background: var(--bg-glass);
+                backdrop-filter: blur(20px);
+                border: 1px solid var(--border-glass);
+                border-radius: var(--border-radius);
+                padding: 1rem;
+                z-index: 1000;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                color: var(--text-primary);
+            `;
+            banner.innerHTML = `
+                <div>
+                    <h4 style="margin: 0 0 0.5rem 0; color: var(--primary-color);">Install The Bean App</h4>
+                    <p style="margin: 0; font-size: 0.9rem; color: var(--text-secondary);">Get the full experience with our app</p>
+                </div>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button onclick="installApp()" class="btn" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Install</button>
+                    <button onclick="dismissBanner()" style="background: none; border: none; color: var(--text-muted); cursor: pointer;">✕</button>
+                </div>
+            `;
+            document.body.appendChild(banner);
+        }
+
+        function installApp() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('User accepted the install prompt');
+                    } else {
+                        console.log('User dismissed the install prompt');
+                    }
+                    deferredPrompt = null;
+                });
+            }
+            dismissBanner();
+        }
+
+        function dismissBanner() {
+            const banner = document.querySelector('div[style*="position: fixed"]');
+            if (banner) {
+                banner.remove();
+            }
+        }
+
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('navigation');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.animate-fade-up, .animate-slide-left').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            observer.observe(el);
+        });
+
+        // Lazy loading for images
+        if ('IntersectionObserver' in window) {
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            document.querySelectorAll('img[data-src]').forEach(img => {
+                imageObserver.observe(img);
+            });
+        }
+    </script>
+</body>
+</html>

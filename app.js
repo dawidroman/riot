@@ -95,69 +95,26 @@ class ConcertScheduleApp {
             // Stash the event so it can be triggered later
             this.deferredPrompt = e;
             // Show our custom install prompt
-            this.showInstallPrompt();
+            this.showInstallPromotion();
         });
 
         // Listen for the appinstalled event
         window.addEventListener('appinstalled', () => {
             console.log('PWA was installed');
-            this.hideInstallPrompt();
+            this.dismissBanner();
             this.showNotification('App installed successfully!', 'success');
         });
-
-        // Setup install prompt buttons
-        const installBtn = document.getElementById('install-btn');
-        const dismissBtn = document.getElementById('install-dismiss');
-
-        if (installBtn) {
-            installBtn.addEventListener('click', () => {
-                this.installApp();
-            });
-        }
-
-        if (dismissBtn) {
-            dismissBtn.addEventListener('click', () => {
-                this.hideInstallPrompt();
-                // Don't show again for this session
-                sessionStorage.setItem('install-prompt-dismissed', 'true');
-            });
-        }
 
         // For testing: Show prompt after 5 seconds if no beforeinstallprompt event
         setTimeout(() => {
             if (!this.deferredPrompt && !sessionStorage.getItem('install-prompt-dismissed')) {
                 console.log('No beforeinstallprompt event received, showing test prompt');
-                this.showTestInstallPrompt();
+                this.showInstallPromotion();
             }
         }, 5000);
     }
 
-    showTestInstallPrompt() {
-        console.log('Showing test install prompt');
-        const prompt = document.getElementById('install-prompt');
-        if (prompt) {
-            // Update the install button to show it's a test
-            const installBtn = document.getElementById('install-btn');
-            if (installBtn) {
-                installBtn.textContent = 'Add to Home Screen';
-                installBtn.onclick = () => {
-                    this.showNotification('On iOS: Tap Share → Add to Home Screen. On Android: Look for install option in browser menu.', 'info');
-                    this.hideInstallPrompt();
-                };
-            }
-            
-            setTimeout(() => {
-                prompt.classList.add('show');
-            }, 1000);
-        }
-    }
-
-    showInstallPrompt() {
-        console.log('showInstallPrompt called');
-        console.log('Dismissed this session:', sessionStorage.getItem('install-prompt-dismissed'));
-        console.log('Already installed:', window.matchMedia('(display-mode: standalone)').matches);
-        console.log('Deferred prompt available:', !!this.deferredPrompt);
-
+    showInstallPromotion() {
         // Don't show if already dismissed this session
         if (sessionStorage.getItem('install-prompt-dismissed')) {
             console.log('Not showing: already dismissed this session');
@@ -170,30 +127,54 @@ class ConcertScheduleApp {
             return;
         }
 
-        const prompt = document.getElementById('install-prompt');
-        console.log('Install prompt element found:', !!prompt);
-        
-        if (prompt) {
-            // Show with a slight delay for better UX
-            setTimeout(() => {
-                console.log('Showing install prompt');
-                prompt.classList.add('show');
-            }, 2000);
-        } else {
-            console.log('Install prompt element not found');
-        }
+        // Create install banner
+        const banner = document.createElement('div');
+        banner.style.cssText = `
+            position: fixed;
+            bottom: calc(var(--nav-height) + 20px);
+            left: 20px;
+            right: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(20px);
+            z-index: 1001;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-primary);
+            max-width: 400px;
+            margin: 0 auto;
+        `;
+        banner.innerHTML = `
+            <div>
+                <h4 style="margin: 0 0 0.5rem 0; color: var(--primary-color); font-size: 1rem;">📱 Install Riot Fest Schedule</h4>
+                <p style="margin: 0; font-size: 0.85rem; color: var(--text-secondary);">Get quick access and use offline!</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-shrink: 0;">
+                <button onclick="window.concertApp.installApp()" style="background: var(--primary-color); color: white; border: none; padding: 0.5rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease;">Install</button>
+                <button onclick="window.concertApp.dismissBanner()" style="background: none; border: none; color: var(--text-secondary); cursor: pointer; padding: 0.5rem; font-size: 1.2rem;">✕</button>
+            </div>
+        `;
+        document.body.appendChild(banner);
     }
 
-    hideInstallPrompt() {
-        const prompt = document.getElementById('install-prompt');
-        if (prompt) {
-            prompt.classList.remove('show');
-            // The CSS will handle pointer-events and visibility
+    dismissBanner() {
+        const banner = document.querySelector('div[style*="position: fixed"]');
+        if (banner) {
+            banner.remove();
+            // Don't show again for this session
+            sessionStorage.setItem('install-prompt-dismissed', 'true');
         }
     }
 
     async installApp() {
         if (!this.deferredPrompt) {
+            // Show manual installation instructions
+            this.showNotification('On iOS: Tap Share → Add to Home Screen. On Android: Look for install option in browser menu.', 'info');
+            this.dismissBanner();
             return;
         }
 
@@ -208,7 +189,7 @@ class ConcertScheduleApp {
         this.deferredPrompt = null;
 
         // Hide our custom install prompt
-        this.hideInstallPrompt();
+        this.dismissBanner();
 
         if (outcome === 'accepted') {
             this.showNotification('Installing app...', 'info');
