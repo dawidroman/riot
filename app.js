@@ -102,9 +102,29 @@ class ConcertScheduleApp {
             dismissBanner();
             this.showNotification('App installed successfully!', 'success');
         });
+
+        // Show prompt after a delay if no beforeinstallprompt event (like bean app)
+        setTimeout(() => {
+            if (!deferredPrompt) {
+                console.log('No beforeinstallprompt event, showing fallback prompt');
+                this.showInstallPromotion();
+            }
+        }, 3000);
     }
 
     showInstallPromotion() {
+        // Don't show if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            console.log('Not showing: already installed');
+            return;
+        }
+
+        // Don't show if banner already exists
+        if (document.querySelector('div[style*="position: fixed"]')) {
+            console.log('Not showing: banner already exists');
+            return;
+        }
+
         // Create install banner
         const banner = document.createElement('div');
         banner.style.cssText = `
@@ -137,6 +157,7 @@ class ConcertScheduleApp {
             </div>
         `;
         document.body.appendChild(banner);
+        console.log('Install banner created and shown');
     }
 
 
