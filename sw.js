@@ -1,4 +1,4 @@
-// Service Worker for Riot Festival Schedule PWA
+// Service Worker for Riot Fest Schedule PWA
 const CACHE_NAME = 'riot-festival-v1.0.0';
 const STATIC_CACHE = 'riot-static-v1.0.0';
 const DYNAMIC_CACHE = 'riot-dynamic-v1.0.0';
@@ -162,7 +162,7 @@ self.addEventListener('push', (event) => {
     };
     
     event.waitUntil(
-        self.registration.showNotification('Riot Festival', options)
+        self.registration.showNotification('Riot Fest', options)
     );
 });
 

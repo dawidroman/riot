@@ -36,8 +36,8 @@ class ConcertScheduleApp {
                 
                 if (day) {
                     this.switchDay(parseInt(day));
-                } else if (action === 'map') {
-                    this.showMap();
+                } else if (action === 'about') {
+                    this.showAbout();
                 }
             });
         });
@@ -50,6 +50,40 @@ class ConcertScheduleApp {
                 this.resumeTimeUpdates();
             }
         });
+
+        // Floating Now Playing button
+        const fab = document.getElementById('fab-now-playing');
+        if (fab) {
+            fab.addEventListener('click', () => {
+                this.autoScrollToNowPlaying();
+            });
+        }
+
+        // About page buttons
+        const closeAboutBtn = document.getElementById('close-about');
+        const forceRefreshBtn = document.getElementById('force-refresh-btn');
+
+        if (closeAboutBtn) {
+            closeAboutBtn.addEventListener('click', () => {
+                this.hideAbout();
+            });
+        }
+
+        if (forceRefreshBtn) {
+            forceRefreshBtn.addEventListener('click', () => {
+                this.forceRefresh();
+            });
+        }
+
+        // Close about page when clicking outside
+        const aboutPage = document.getElementById('about-page');
+        if (aboutPage) {
+            aboutPage.addEventListener('click', (e) => {
+                if (e.target === aboutPage) {
+                    this.hideAbout();
+                }
+            });
+        }
     }
 
     setupInstallPrompt() {
@@ -195,7 +229,7 @@ class ConcertScheduleApp {
             console.log('Schedule data loaded successfully');
             
             // Now trigger the initial auto-scroll after data is loaded
-            this.updateNowPlayingStatus();
+            this.updateNowPlayingStatus(true); // do the initial scroll once
         } catch (error) {
             console.error('Error loading schedule data:', error);
             this.loadSampleData(); // Fallback to sample data
@@ -203,7 +237,7 @@ class ConcertScheduleApp {
             this.showNotification('Using sample data - check console for details', 'warning');
             
             // Trigger auto-scroll for fallback data too
-            this.updateNowPlayingStatus();
+            this.updateNowPlayingStatus(true);
         }
     }
 
@@ -397,24 +431,30 @@ class ConcertScheduleApp {
     startTimeUpdates() {
         // Update every minute
         this.timeUpdateInterval = setInterval(() => {
-            this.updateNowPlayingStatus();
+            // Only update labels and FAB visibility; no auto-scroll
+            this.updateNowPlayingStatus(false);
         }, 60000); // 60 seconds
 
         // Don't do initial update here - wait for schedule data to load
         console.log('Time updates started, waiting for schedule data to load...');
     }
 
-    updateNowPlayingStatus() {
+    updateNowPlayingStatus(shouldScroll = false) {
         // Re-render schedule to update "now playing" status
         this.renderSchedule();
         
-        // Use requestAnimationFrame to ensure DOM is fully updated before scrolling
-        requestAnimationFrame(() => {
-            // Double-check with another requestAnimationFrame for extra safety
+        // After render, update FAB visibility
+        this.updateNowPlayingFab();
+
+        if (shouldScroll) {
+            // Use requestAnimationFrame to ensure DOM is fully updated before scrolling
             requestAnimationFrame(() => {
-                this.autoScrollToNowPlaying();
+                // Double-check with another requestAnimationFrame for extra safety
+                requestAnimationFrame(() => {
+                    this.autoScrollToNowPlaying();
+                });
             });
-        });
+        }
     }
 
     autoScrollToNowPlaying() {
@@ -457,6 +497,18 @@ class ConcertScheduleApp {
         } else {
             console.log('No currently playing events found in DOM');
             console.log('But we know these events should be playing:', currentlyPlayingEvents.map(e => e.title));
+        }
+    }
+
+    updateNowPlayingFab() {
+        const fab = document.getElementById('fab-now-playing');
+        if (!fab) return;
+
+        const nowPlayingCards = document.querySelectorAll('.event-card.now-playing');
+        if (nowPlayingCards.length > 0) {
+            fab.classList.add('show');
+        } else {
+            fab.classList.remove('show');
         }
     }
 
@@ -528,7 +580,7 @@ class ConcertScheduleApp {
                     time: '6:00 PM',
                     title: 'Opening Ceremony',
                     stage: 'Main Stage',
-                    description: 'Welcome to Riot Festival 2024!'
+                    description: 'Welcome to Riot Fest 2024!'
                 },
                 {
                     time: '6:30 PM',
@@ -760,9 +812,79 @@ class ConcertScheduleApp {
         }));
     }
 
-    showMap() {
-        // Placeholder for map functionality
-        this.showNotification('Map feature coming soon!', 'info');
+    showAbout() {
+        const aboutPage = document.getElementById('about-page');
+        if (aboutPage) {
+            aboutPage.classList.add('show');
+            // Prevent body scroll when about page is open
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    hideAbout() {
+        const aboutPage = document.getElementById('about-page');
+        if (aboutPage) {
+            aboutPage.classList.remove('show');
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+    }
+
+    async forceRefresh() {
+        try {
+            // Show loading state
+            const refreshBtn = document.getElementById('force-refresh-btn');
+            if (refreshBtn) {
+                refreshBtn.disabled = true;
+                refreshBtn.innerHTML = '<span class="refresh-icon">🔄</span> Refreshing...';
+            }
+
+            // Clear all caches
+            if ('caches' in window) {
+                const cacheNames = await caches.keys();
+                await Promise.all(
+                    cacheNames.map(cacheName => caches.delete(cacheName))
+                );
+                console.log('All caches cleared');
+            }
+
+            // Clear localStorage (except favorites)
+            const favorites = localStorage.getItem('riot-festival-favorites');
+            localStorage.clear();
+            if (favorites) {
+                localStorage.setItem('riot-festival-favorites', favorites);
+            }
+
+            // Clear sessionStorage
+            sessionStorage.clear();
+
+            // Unregister service worker
+            if ('serviceWorker' in navigator) {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                await Promise.all(
+                    registrations.map(registration => registration.unregister())
+                );
+                console.log('Service workers unregistered');
+            }
+
+            this.showNotification('Cache cleared! Reloading...', 'success');
+
+            // Reload the page after a short delay
+            setTimeout(() => {
+                window.location.reload(true);
+            }, 1000);
+
+        } catch (error) {
+            console.error('Error during force refresh:', error);
+            this.showNotification('Error during refresh. Please reload manually.', 'error');
+            
+            // Reset button
+            const refreshBtn = document.getElementById('force-refresh-btn');
+            if (refreshBtn) {
+                refreshBtn.disabled = false;
+                refreshBtn.innerHTML = '<span class="refresh-icon">🔄</span> Force Refresh';
+            }
+        }
     }
 
     // Manual test function for auto-scroll (for debugging)

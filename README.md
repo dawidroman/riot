@@ -1,4 +1,4 @@
-# Riot Festival Schedule PWA
+# Riot Fest Schedule PWA
 
 A modern Progressive Web App for displaying a 3-day concert schedule with offline functionality.
 

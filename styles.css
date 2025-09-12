@@ -688,3 +688,244 @@ body {
         font-size: 0.8rem;
     }
 }
+
+/* About Page */
+.about-page {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.about-page.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.about-content {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+}
+
+.about-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 1.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.about-header h2 {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: 1.5rem;
+}
+
+.close-about {
+    background: none;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-about:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.about-body {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.about-section {
+    margin-bottom: 2rem;
+}
+
+.about-section:last-child {
+    margin-bottom: 0;
+}
+
+.about-section h3 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.about-section p {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.about-section ul {
+    color: var(--text-secondary);
+    padding-left: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-section li {
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.kofi-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #ff5f5f 0%, #ff6b6b 100%);
+    color: white;
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 95, 95, 0.3);
+}
+
+.kofi-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 95, 95, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+.kofi-icon {
+    font-size: 1.2rem;
+}
+
+.force-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.force-refresh-btn:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+}
+
+.refresh-icon {
+    font-size: 1.1rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Mobile About Page */
+@media (max-width: 768px) {
+    .about-page {
+        padding: 0.5rem;
+    }
+    
+    .about-content {
+        max-height: 95vh;
+    }
+    
+    .about-header {
+        padding: 1rem 1rem 0;
+        margin-bottom: 1rem;
+    }
+    
+    .about-header h2 {
+        font-size: 1.3rem;
+    }
+    
+    .about-body {
+        padding: 0 1rem 1rem;
+    }
+    
+    .about-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .about-section h3 {
+        font-size: 1rem;
+    }
+    
+    .kofi-button,
+    .force-refresh-btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Floating Now Playing Button (FAB) */
+.fab-now-playing {
+    position: fixed;
+    right: 16px;
+    bottom: calc(var(--nav-height) + 16px);
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 24px;
+    padding: 0.6rem 0.9rem;
+    font-weight: 700;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+    cursor: pointer;
+    z-index: 1100;
+    transition: transform 0.2s ease, background 0.2s ease, opacity 0.2s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fab-now-playing.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.fab-now-playing:hover {
+    background: var(--secondary-color);
+    transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+    .fab-now-playing {
+        right: 12px;
+        bottom: calc(var(--nav-height) + 12px);
+        padding: 0.5rem 0.8rem;
+        border-radius: 20px;
+    }
+}

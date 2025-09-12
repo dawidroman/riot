@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Concert Schedule - Riot Festival</title>
+    <title>Concert Schedule - Riot Fest</title>
     <meta name="description" content="3-day concert schedule with offline access">
     <meta name="theme-color" content="#1a1a1a">
     
@@ -25,7 +25,7 @@
     <div class="app">
         <!-- Header -->
         <header class="header">
-            <h1 class="title">Riot Festival</h1>
+            <h1 class="title">Riot Fest</h1>
             <p class="subtitle">3-Day Music Experience</p>
         </header>
 
@@ -62,18 +62,72 @@
                 <div class="nav-icon">📅</div>
                 <span class="nav-label">Day 3</span>
             </button>
-            <button class="nav-item" data-action="map">
-                <div class="nav-icon">🗺️</div>
-                <span class="nav-label">Map</span>
+            <button class="nav-item" data-action="about">
+                <div class="nav-icon">ℹ️</div>
+                <span class="nav-label">About</span>
             </button>
         </nav>
+
+        <!-- About Page -->
+        <div class="about-page" id="about-page">
+            <div class="about-content">
+                <div class="about-header">
+                    <h2>About Riot Fest Schedule</h2>
+                    <button class="close-about" id="close-about">✕</button>
+                </div>
+                
+                <div class="about-body">
+                    <div class="about-section">
+                        <h3>🎵 Festival Schedule PWA</h3>
+                        <p>A modern Progressive Web App for the Riot Fest 3-day concert schedule. Built with offline functionality, real-time updates, and a beautiful mobile-first design.</p>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h3>✨ Features</h3>
+                        <ul>
+                            <li>📱 <strong>PWA Support</strong> - Install on your device</li>
+                            <li>🔴 <strong>Now Playing</strong> - See what's currently live</li>
+                            <li>⭐ <strong>Favorites</strong> - Star your favorite artists</li>
+                            <li>🎭 <strong>Stage Filters</strong> - Filter by stage or favorites</li>
+                            <li>📱 <strong>Offline Access</strong> - Works without internet</li>
+                            <li>⚡ <strong>Real-time Updates</strong> - Always current</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h3>☕ Support the Developer</h3>
+                        <p>If you enjoy this app, consider supporting its development:</p>
+                        <a href="https://ko-fi.com/yourusername" target="_blank" rel="noopener" class="kofi-button">
+                            <span class="kofi-icon">☕</span>
+                            Buy me a coffee on Ko-fi
+                        </a>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h3>🔄 Force Refresh</h3>
+                        <p>Clear all cache and reload the latest data from the server:</p>
+                        <button class="force-refresh-btn" id="force-refresh-btn">
+                            <span class="refresh-icon">🔄</span>
+                            Force Refresh
+                        </button>
+                    </div>
+                    
+                    <div class="about-section">
+                        <h3>📱 Installation</h3>
+                        <p><strong>iOS:</strong> Tap Share → Add to Home Screen</p>
+                        <p><strong>Android:</strong> Look for "Install" in your browser menu</p>
+                        <p><strong>Desktop:</strong> Look for the install icon in your address bar</p>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- PWA Install Prompt -->
         <div class="install-prompt" id="install-prompt">
             <div class="install-prompt-content">
                 <div class="install-prompt-icon">📱</div>
                 <div class="install-prompt-text">
-                    <h3>Install Riot Festival Schedule</h3>
+                    <h3>Install Riot Fest Schedule</h3>
                     <p>Get quick access and use offline!</p>
                 </div>
                 <div class="install-prompt-actions">
