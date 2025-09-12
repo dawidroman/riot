@@ -87,9 +87,16 @@ class ConcertScheduleApp {
     }
 
     setupInstallPrompt() {
+        console.log('Setting up install prompt...');
+        console.log('PWA criteria check:');
+        console.log('- HTTPS:', location.protocol === 'https:');
+        console.log('- Service Worker:', 'serviceWorker' in navigator);
+        console.log('- Manifest:', document.querySelector('link[rel="manifest"]') !== null);
+        console.log('- Standalone mode:', window.matchMedia('(display-mode: standalone)').matches);
+
         // Listen for the beforeinstallprompt event
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('PWA install prompt available');
+            console.log('🎉 PWA install prompt available!', e);
             // Prevent the mini-infobar from appearing on mobile
             e.preventDefault();
             // Stash the event so it can be triggered later
@@ -100,18 +107,18 @@ class ConcertScheduleApp {
 
         // Listen for the appinstalled event
         window.addEventListener('appinstalled', () => {
-            console.log('PWA was installed');
+            console.log('✅ PWA was installed');
             this.dismissBanner();
             this.showNotification('App installed successfully!', 'success');
         });
 
-        // For testing: Show prompt after 5 seconds if no beforeinstallprompt event
+        // For testing: Show prompt after 3 seconds if no beforeinstallprompt event
         setTimeout(() => {
             if (!this.deferredPrompt && !sessionStorage.getItem('install-prompt-dismissed')) {
-                console.log('No beforeinstallprompt event received, showing test prompt');
+                console.log('⚠️ No beforeinstallprompt event received, showing fallback prompt');
                 this.showInstallPromotion();
             }
-        }, 5000);
+        }, 3000);
     }
 
     showInstallPromotion() {
@@ -171,28 +178,41 @@ class ConcertScheduleApp {
     }
 
     async installApp() {
+        console.log('Install button clicked');
+        console.log('Deferred prompt available:', !!this.deferredPrompt);
+        
         if (!this.deferredPrompt) {
+            console.log('No deferred prompt available, showing manual instructions');
             // Show manual installation instructions
             this.showNotification('On iOS: Tap Share → Add to Home Screen. On Android: Look for install option in browser menu.', 'info');
             this.dismissBanner();
             return;
         }
 
-        // Show the install prompt
-        this.deferredPrompt.prompt();
+        try {
+            console.log('Showing system install prompt...');
+            // Show the install prompt
+            this.deferredPrompt.prompt();
 
-        // Wait for the user to respond to the prompt
-        const { outcome } = await this.deferredPrompt.userChoice;
-        console.log(`User response to the install prompt: ${outcome}`);
+            // Wait for the user to respond to the prompt
+            const { outcome } = await this.deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
 
-        // Clear the deferredPrompt
-        this.deferredPrompt = null;
+            // Clear the deferredPrompt
+            this.deferredPrompt = null;
 
-        // Hide our custom install prompt
-        this.dismissBanner();
+            // Hide our custom install prompt
+            this.dismissBanner();
 
-        if (outcome === 'accepted') {
-            this.showNotification('Installing app...', 'info');
+            if (outcome === 'accepted') {
+                this.showNotification('Installing app...', 'info');
+            } else {
+                this.showNotification('Installation cancelled', 'info');
+            }
+        } catch (error) {
+            console.error('Error during install:', error);
+            this.showNotification('Installation failed. Please try manual installation.', 'error');
+            this.dismissBanner();
         }
     }
 
@@ -987,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Clear any dismissal flags
             sessionStorage.removeItem('install-prompt-dismissed');
             // Show the test prompt
-            window.concertApp.showTestInstallPrompt();
+            window.concertApp.showInstallPromotion();
         }
     };
     
@@ -1000,5 +1020,27 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log('- Already installed:', window.matchMedia('(display-mode: standalone)').matches);
             console.log('- User agent:', navigator.userAgent);
         }
+    };
+    
+    // Add global function to force install prompt
+    window.forceInstallPrompt = () => {
+        if (window.concertApp) {
+            sessionStorage.removeItem('install-prompt-dismissed');
+            window.concertApp.deferredPrompt = null;
+            window.concertApp.showInstallPromotion();
+        }
+    };
+    
+    // Add global function to check PWA criteria
+    window.checkPWACriteria = () => {
+        console.log('PWA Criteria Check:');
+        console.log('- HTTPS:', location.protocol === 'https:');
+        console.log('- Service Worker:', 'serviceWorker' in navigator);
+        console.log('- Manifest:', document.querySelector('link[rel="manifest"]') !== null);
+        console.log('- Standalone mode:', window.matchMedia('(display-mode: standalone)').matches);
+        console.log('- User agent:', navigator.userAgent);
+        console.log('- Platform:', navigator.platform);
+        console.log('- Cookie enabled:', navigator.cookieEnabled);
+        console.log('- Online:', navigator.onLine);
     };
 });
