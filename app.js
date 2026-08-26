@@ -697,8 +697,6 @@ class ConcertScheduleApp {
     updateConnectionStatus() {
         const online = navigator.onLine;
         const label = online ? 'Online' : 'Offline';
-        document.getElementById('network-status').classList.toggle('offline', !online);
-        document.getElementById('network-status-text').textContent = label;
         document.getElementById('dialog-network-status').textContent = `Network: ${label}`;
     }
 
@@ -713,7 +711,6 @@ class ConcertScheduleApp {
                 }).format(date)}`;
             }
         }
-        document.getElementById('last-update').textContent = label;
         document.getElementById('dialog-last-update').textContent = label;
     }
 
