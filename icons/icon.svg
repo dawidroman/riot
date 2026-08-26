@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Riot Fest Schedule</title>
+  <desc id="description">An orange app tile with a black record and orange music note.</desc>
+  <rect width="512" height="512" rx="96" fill="#ff5a1f"/>
+  <circle cx="256" cy="256" r="174" fill="#151515"/>
+  <circle cx="256" cy="256" r="54" fill="#ff5a1f"/>
+  <path fill="#ff5a1f" d="M296 137v158.2c-13.3-7.1-29.7-10.5-46.6-8.2-34.4 4.7-58.9 29.9-54.8 56.4 4 26.4 35.1 44 69.5 39.3 31-4.2 54-25 55.1-48.4h.1V208.9l82.1-18.1v78.9c-13.4-7.1-29.7-10.5-46.7-8.2-34.4 4.7-58.9 30-54.8 56.4 4 26.4 35.2 44 69.5 39.3 31.1-4.2 54.1-25.1 55.1-48.5h.2V108.6L296 137Z"/>
+  <path fill="#151515" d="m95 78 21 25 31-9-17 28 19 27-32-8-20 25-2-32-30-12 31-11-1-33Zm311 288 14 17 21-6-12 19 13 18-22-6-13 17-2-22-20-8 21-7v-22Z"/>
+</svg>

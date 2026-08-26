@@ -1,232 +1,108 @@
-// Service Worker for Riot Fest Schedule PWA
-const CACHE_NAME = 'riot-festival-v1.0.0';
-const STATIC_CACHE = 'riot-static-v1.0.0';
-const DYNAMIC_CACHE = 'riot-dynamic-v1.0.0';
+'use strict';
 
-// Files to cache for offline functionality
-const STATIC_FILES = [
+const VERSION = '1.5.0';
+const SHELL_CACHE = `riot-shell-${VERSION}`;
+const SCHEDULE_CACHE = 'riot-schedule-data';
+const SCHEDULE_PATH = '/sample-schedule.csv';
+const APP_SHELL = [
     '/',
     '/index.html',
     '/styles.css',
     '/app.js',
     '/manifest.json',
-    '/sample-schedule.csv',
-    '/icons/icon-72x72.svg',
-    '/icons/icon-96x96.svg',
-    '/icons/icon-128x128.svg',
-    '/icons/icon-144x144.svg',
-    '/icons/icon-152x152.svg',
-    '/icons/icon-192x192.svg',
-    '/icons/icon-384x384.svg',
-    '/icons/icon-512x512.svg',
-    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'
+    '/icons/icon.svg',
+    '/icons/icon-72x72.png',
+    '/icons/icon-96x96.png',
+    '/icons/icon-128x128.png',
+    '/icons/icon-144x144.png',
+    '/icons/icon-152x152.png',
+    '/icons/icon-192x192.png',
+    '/icons/icon-384x384.png',
+    '/icons/icon-512x512.png'
 ];
 
-// Install event - cache static files
 self.addEventListener('install', (event) => {
-    console.log('Service Worker installing...');
-    
-    event.waitUntil(
-        caches.open(STATIC_CACHE)
-            .then((cache) => {
-                console.log('Caching static files...');
-                return cache.addAll(STATIC_FILES);
-            })
-            .then(() => {
-                console.log('Static files cached successfully');
-                return self.skipWaiting();
-            })
-            .catch((error) => {
-                console.error('Error caching static files:', error);
-            })
-    );
+    event.waitUntil((async () => {
+        const shellCache = await caches.open(SHELL_CACHE);
+        await shellCache.addAll(APP_SHELL);
+
+        try {
+            const scheduleResponse = await fetch(SCHEDULE_PATH, { cache: 'no-store' });
+            if (scheduleResponse.ok) {
+                const scheduleCache = await caches.open(SCHEDULE_CACHE);
+                await scheduleCache.put(SCHEDULE_PATH, scheduleResponse);
+            }
+        } catch (error) {
+            // A schedule saved by an older release remains available in the stable data cache.
+            console.warn('Schedule could not be refreshed during install:', error);
+        }
+
+        await self.skipWaiting();
+    })());
 });
 
-// Activate event - clean up old caches
 self.addEventListener('activate', (event) => {
-    console.log('Service Worker activating...');
-    
-    event.waitUntil(
-        caches.keys()
-            .then((cacheNames) => {
-                return Promise.all(
-                    cacheNames.map((cacheName) => {
-                        if (cacheName !== STATIC_CACHE && cacheName !== DYNAMIC_CACHE) {
-                            console.log('Deleting old cache:', cacheName);
-                            return caches.delete(cacheName);
-                        }
-                    })
-                );
-            })
-            .then(() => {
-                console.log('Service Worker activated');
-                return self.clients.claim();
-            })
-    );
+    event.waitUntil((async () => {
+        const cacheNames = await caches.keys();
+        await Promise.all(cacheNames
+            .filter((cacheName) => cacheName.startsWith('riot-')
+                && cacheName !== SHELL_CACHE
+                && cacheName !== SCHEDULE_CACHE)
+            .map((cacheName) => caches.delete(cacheName)));
+        await self.clients.claim();
+    })());
 });
 
-// Fetch event - serve from cache, fallback to network
+async function addSourceHeader(response, source) {
+    const headers = new Headers(response.headers);
+    headers.set('X-Riot-Schedule-Source', source);
+    return new Response(await response.arrayBuffer(), {
+        headers,
+        status: response.status,
+        statusText: response.statusText
+    });
+}
+
+async function networkFirstSchedule(request) {
+    const cache = await caches.open(SCHEDULE_CACHE);
+    try {
+        const response = await fetch(request, { cache: 'no-store' });
+        if (!response.ok) throw new Error(`Schedule request returned ${response.status}.`);
+        await cache.put(SCHEDULE_PATH, response.clone());
+        return addSourceHeader(response, 'network');
+    } catch (error) {
+        const cached = await cache.match(SCHEDULE_PATH);
+        if (cached) return addSourceHeader(cached, 'cache');
+        throw error;
+    }
+}
+
+async function cacheFirstShell(request) {
+    const cached = await caches.match(request, { ignoreSearch: request.mode === 'navigate' });
+    if (cached) return cached;
+
+    try {
+        return await fetch(request);
+    } catch (error) {
+        if (request.mode === 'navigate') {
+            const fallback = await caches.match('/index.html');
+            if (fallback) return fallback;
+        }
+        throw error;
+    }
+}
+
 self.addEventListener('fetch', (event) => {
     const { request } = event;
+    if (request.method !== 'GET') return;
+
     const url = new URL(request.url);
-    
-    // Skip non-GET requests
-    if (request.method !== 'GET') {
+    if (url.origin !== self.location.origin) return;
+
+    if (url.pathname === SCHEDULE_PATH) {
+        event.respondWith(networkFirstSchedule(request));
         return;
     }
-    
-    // Skip chrome-extension and other non-http requests
-    if (!url.protocol.startsWith('http')) {
-        return;
-    }
-    
-    event.respondWith(
-        caches.match(request)
-            .then((cachedResponse) => {
-                // Return cached version if available
-                if (cachedResponse) {
-                    console.log('Serving from cache:', request.url);
-                    return cachedResponse;
-                }
-                
-                // Otherwise, fetch from network
-                console.log('Fetching from network:', request.url);
-                return fetch(request)
-                    .then((response) => {
-                        // Don't cache non-successful responses
-                        if (!response || response.status !== 200 || response.type !== 'basic') {
-                            return response;
-                        }
-                        
-                        // Clone the response for caching
-                        const responseToCache = response.clone();
-                        
-                        // Cache dynamic content
-                        caches.open(DYNAMIC_CACHE)
-                            .then((cache) => {
-                                cache.put(request, responseToCache);
-                            });
-                        
-                        return response;
-                    })
-                    .catch((error) => {
-                        console.error('Fetch failed:', error);
-                        
-                        // Return offline page for navigation requests
-                        if (request.destination === 'document') {
-                            return caches.match('/index.html');
-                        }
-                        
-                        // Return a generic offline response for other requests
-                        return new Response('Offline content not available', {
-                            status: 503,
-                            statusText: 'Service Unavailable',
-                            headers: new Headers({
-                                'Content-Type': 'text/plain'
-                            })
-                        });
-                    });
-            })
-    );
+
+    event.respondWith(cacheFirstShell(request));
 });
-
-// Background sync for offline data
-self.addEventListener('sync', (event) => {
-    console.log('Background sync triggered:', event.tag);
-    
-    if (event.tag === 'schedule-sync') {
-        event.waitUntil(
-            // Handle any pending schedule updates
-            handleScheduleSync()
-        );
-    }
-});
-
-// Push notification handling
-self.addEventListener('push', (event) => {
-    console.log('Push notification received');
-    
-    const options = {
-        body: event.data ? event.data.text() : 'New schedule update available!',
-        icon: '/icons/icon-192x192.png',
-        badge: '/icons/icon-72x72.png',
-        vibrate: [100, 50, 100],
-        data: {
-            dateOfArrival: Date.now(),
-            primaryKey: 1
-        },
-        actions: [
-            {
-                action: 'explore',
-                title: 'View Schedule',
-                icon: '/icons/icon-96x96.png'
-            },
-            {
-                action: 'close',
-                title: 'Close',
-                icon: '/icons/icon-96x96.png'
-            }
-        ]
-    };
-    
-    event.waitUntil(
-        self.registration.showNotification('Riot Fest', options)
-    );
-});
-
-// Notification click handling
-self.addEventListener('notificationclick', (event) => {
-    console.log('Notification clicked:', event.action);
-    
-    event.notification.close();
-    
-    if (event.action === 'explore') {
-        event.waitUntil(
-            clients.openWindow('/')
-        );
-    }
-});
-
-// Helper function for schedule sync
-async function handleScheduleSync() {
-    try {
-        // This would typically sync any offline changes
-        // For now, just log that sync occurred
-        console.log('Schedule sync completed');
-    } catch (error) {
-        console.error('Schedule sync failed:', error);
-    }
-}
-
-// Message handling for communication with main thread
-self.addEventListener('message', (event) => {
-    console.log('Service Worker received message:', event.data);
-    
-    if (event.data && event.data.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-    
-    if (event.data && event.data.type === 'GET_VERSION') {
-        event.ports[0].postMessage({ version: CACHE_NAME });
-    }
-});
-
-// Periodic background sync (if supported)
-self.addEventListener('periodicsync', (event) => {
-    if (event.tag === 'schedule-update') {
-        event.waitUntil(
-            // Check for schedule updates
-            checkForScheduleUpdates()
-        );
-    }
-});
-
-// Helper function to check for schedule updates
-async function checkForScheduleUpdates() {
-    try {
-        // This would typically check a server for updates
-        console.log('Checking for schedule updates...');
-    } catch (error) {
-        console.error('Failed to check for updates:', error);
-    }
-}
