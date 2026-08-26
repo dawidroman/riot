@@ -1,9 +1,21 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
   <title id="title">Riot Fest Schedule</title>
-  <desc id="description">An orange app tile with a black record and orange music note.</desc>
-  <rect width="512" height="512" rx="96" fill="#ff5a1f"/>
-  <circle cx="256" cy="256" r="174" fill="#151515"/>
-  <circle cx="256" cy="256" r="54" fill="#ff5a1f"/>
-  <path fill="#ff5a1f" d="M296 137v158.2c-13.3-7.1-29.7-10.5-46.6-8.2-34.4 4.7-58.9 29.9-54.8 56.4 4 26.4 35.1 44 69.5 39.3 31-4.2 54-25 55.1-48.4h.1V208.9l82.1-18.1v78.9c-13.4-7.1-29.7-10.5-46.7-8.2-34.4 4.7-58.9 30-54.8 56.4 4 26.4 35.2 44 69.5 39.3 31.1-4.2 54.1-25.1 55.1-48.5h.2V108.6L296 137Z"/>
-  <path fill="#151515" d="m95 78 21 25 31-9-17 28 19 27-32-8-20 25-2-32-30-12 31-11-1-33Zm311 288 14 17 21-6-12 19 13 18-22-6-13 17-2-22-20-8 21-7v-22Z"/>
+  <desc id="description">A bold RF monogram on a punk-inspired orange calendar.</desc>
+
+  <rect width="512" height="512" rx="104" fill="#ff541f"/>
+  <path fill="#e83c0d" d="M0 354 354 0h86L0 440v-86Zm72 158L512 72v88L160 512H72Z" opacity=".55"/>
+
+  <rect x="72" y="76" width="368" height="364" rx="58" fill="#111113"/>
+  <rect x="92" y="96" width="328" height="324" rx="39" fill="#fff2dc"/>
+  <path fill="#111113" d="M131 96h250c22 0 39 17 39 39v72H92v-72c0-22 17-39 39-39Z"/>
+
+  <path fill="#fff2dc" d="M143 63h34v67h-34zm96 0h34v67h-34zm96 0h34v67h-34z"/>
+  <circle cx="160" cy="132" r="10" fill="#ff541f"/>
+  <circle cx="256" cy="132" r="10" fill="#ff541f"/>
+  <circle cx="352" cy="132" r="10" fill="#ff541f"/>
+
+  <path fill="#111113" fill-rule="evenodd" d="M125 239h67c46 0 72 20 72 57 0 24-13 42-36 51l43 63h-50l-35-55h-18v55h-43V239Zm43 36v46h22c20 0 30-8 30-23 0-16-10-23-30-23h-22Z"/>
+  <path fill="#111113" d="M285 239h112v38h-69v31h61v37h-61v65h-43V239Z"/>
+
+  <path fill="#ffd23f" stroke="#111113" stroke-linejoin="round" stroke-width="10" d="m405 368 13 24 27 5-19 20 4 28-25-12-25 12 4-28-19-20 27-5 13-24Z"/>
 </svg>
