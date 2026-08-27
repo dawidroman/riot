@@ -1,93 +1,107 @@
-Day,Date,Stage,Time,Artist
-Friday,2025-09-19,Riot Stage,12:30pm - 1:00pm,Harrison Gordon
-Friday,2025-09-19,Riot Stage,1:40pm - 2:10pm,Julia Wolf
-Friday,2025-09-19,Riot Stage,3:00pm - 3:40pm,Honey Revenge
-Friday,2025-09-19,Riot Stage,4:30pm - 5:10pm,Rico Nasty
-Friday,2025-09-19,Riot Stage,6:20pm - 7:20pm,Alkaline Trio (Album Play: Maybe I’ll Catch Fire)
-Friday,2025-09-19,Riot Stage,8:30pm - 10:00pm,Blink-182
-Friday,2025-09-19,Roots Stage,12:00pm - 12:30pm,La Rosa Noir
-Friday,2025-09-19,Roots Stage,1:05pm - 1:35pm,The Barbarians of California
-Friday,2025-09-19,Roots Stage,2:00pm - 2:55pm,Touché Amoré
-Friday,2025-09-19,Roots Stage,3:45pm - 4:25pm,Harms Way
-Friday,2025-09-19,Roots Stage,5:15pm - 6:15pm,Senses Fail
-Friday,2025-09-19,Roots Stage,7:25pm - 8:25pm,Knocked Loose
-Friday,2025-09-19,Rebel Stage,12:50pm - 1:20pm,Big Ass Truck LLC
-Friday,2025-09-19,Rebel Stage,1:40pm - 2:10pm,The Tossers
-Friday,2025-09-19,Rebel Stage,2:40pm - 3:30pm,Samiam (Album Play: Astray)
-Friday,2025-09-19,Rebel Stage,4:00pm - 5:00pm,Agnostic Front (Album Play: Victim in Pain)
-Friday,2025-09-19,Rebel Stage,5:30pm - 6:30pm,Didjits
-Friday,2025-09-19,Rebel Stage,7:00pm - 8:00pm,Stiff Little Fingers
-Friday,2025-09-19,Rebel Stage,8:30pm - 10:00pm,The Pogues (Album Play: Rum Sodomy & The Lash)
-Friday,2025-09-19,Rise/Weird Al Stage,12:00pm - 12:30pm,Shonen Knife
-Friday,2025-09-19,Rise/Weird Al Stage,1:05pm - 1:35pm,Mac Sabbath
-Friday,2025-09-19,Rise/Weird Al Stage,2:15pm - 2:45pm,Puddles Pity Party
-Friday,2025-09-19,Rise/Weird Al Stage,3:25pm - 3:55pm,Camper Van Beethoven
-Friday,2025-09-19,Rise/Weird Al Stage,5:05pm - 5:50pm,Sparks
-Friday,2025-09-19,Rise/Weird Al Stage,7:00pm - 8:30pm,Weird Al Yankovic
-Friday,2025-09-19,Radical Stage,12:30pm - 1:00pm,Loviet
-Friday,2025-09-19,Radical Stage,1:40pm - 2:10pm,Marianas Trench
-Friday,2025-09-19,Radical Stage,2:50pm - 3:20pm,Shudder To Think
-Friday,2025-09-19,Radical Stage,4:00pm - 5:00pm,The Hold Steady (Album Play: Separation Sunday)
-Friday,2025-09-19,Radical Stage,5:55pm - 6:55pm,Rilo Kiley
-Saturday,2025-09-20,Riot Stage,12:35pm - 1:05pm,Wishy
-Saturday,2025-09-20,Riot Stage,1:45pm - 2:15pm,Militarie Gun
-Saturday,2025-09-20,Riot Stage,2:55pm - 3:25pm,Superchunk
-Saturday,2025-09-20,Riot Stage,4:10pm - 5:10pm,James
-Saturday,2025-09-20,Riot Stage,6:20pm - 7:20pm,The Beach Boys
-Saturday,2025-09-20,Riot Stage,8:30pm - 10:00pm,Weezer (Album Play: The Blue Album)
-Saturday,2025-09-20,Roots Stage,12:00pm - 12:30pm,Speed of Light
-Saturday,2025-09-20,Roots Stage,1:10pm - 1:40pm,Girl in a Coma
-Saturday,2025-09-20,Roots Stage,2:20pm - 2:50pm,The Cribs
-Saturday,2025-09-20,Roots Stage,3:35pm - 4:05pm,Panchiko
-Saturday,2025-09-20,Roots Stage,5:15pm - 6:15pm,The Front Bottoms (Album Play: Back on Top)
-Saturday,2025-09-20,Roots Stage,7:25pm - 8:25pm,Jack White
-Saturday,2025-09-20,Rebel Stage,12:05pm - 12:20pm,Myles Bass
-Saturday,2025-09-20,Rebel Stage,12:50pm - 1:15pm,Feral Tact
-Saturday,2025-09-20,Rebel Stage,1:45pm - 2:30pm,Agent Orange (Album Play: Living in Darkness)
-Saturday,2025-09-20,Rebel Stage,3:15pm - 4:15pm,GWAR
-Saturday,2025-09-20,Rebel Stage,5:30pm - 6:30pm,Marky Ramone (Plays the Ramones)
-Saturday,2025-09-20,Rebel Stage,7:00pm - 8:00pm,Buzzcocks
-Saturday,2025-09-20,Rebel Stage,8:30pm - 9:30pm,The Damned
-Saturday,2025-09-20,Rise/Weird Al Stage,12:00pm - 12:20pm,Cliffdiver
-Saturday,2025-09-20,Rise/Weird Al Stage,1:05pm - 1:35pm,Thrown
-Saturday,2025-09-20,Rise/Weird Al Stage,2:15pm - 2:45pm,Free Throw
-Saturday,2025-09-20,Rise/Weird Al Stage,3:55pm - 4:25pm,Citizen
-Saturday,2025-09-20,Rise/Weird Al Stage,5:20pm - 6:20pm,Knuckle Puck (Album Play: Copacetic)
-Saturday,2025-09-20,Rise/Weird Al Stage,7:30pm - 8:30pm,All Time Low
-Saturday,2025-09-20,Radical Stage,12:30pm - 1:00pm,Violent Vira
-Saturday,2025-09-20,Radical Stage,1:40pm - 2:10pm,H2O
-Saturday,2025-09-20,Radical Stage,2:50pm - 3:50pm,Helmet (Album Play: Betty)
-Saturday,2025-09-20,Radical Stage,4:30pm - 5:15pm,The Bouncing Souls (Album Play: How I Spent My Summer Vacation)
-Saturday,2025-09-20,Radical Stage,6:25pm - 7:25pm,Dropkick Murphys
-Sunday,2025-09-21,Riot Stage,12:00pm - 12:40pm,The Effigies (Album Play: For Ever Grounded)
-Sunday,2025-09-21,Riot Stage,1:15pm - 1:55pm,Zero Boys (Album Play: Vicious Circle)
-Sunday,2025-09-21,Riot Stage,2:50pm - 3:20pm,The Linda Lindas
-Sunday,2025-09-21,Riot Stage,4:10pm - 4:55pm,Screeching Weasel (Album Play: My Brain Hurts)
-Sunday,2025-09-21,Riot Stage,6:05pm - 7:05pm,Idles
-Sunday,2025-09-21,Riot Stage,8:15pm - 10:00pm,Green Day
-Sunday,2025-09-21,Roots Stage,12:40pm - 1:10pm,The Paradox
-Sunday,2025-09-21,Roots Stage,2:00pm - 2:45pm,Pegboy (Album Play: Strong Reaction)
-Sunday,2025-09-21,Roots Stage,3:25pm - 4:05pm,Dance Hall Crashers
-Sunday,2025-09-21,Roots Stage,5:00pm - 6:00pm,Bad Religion (Album Play: Suffer)
-Sunday,2025-09-21,Roots Stage,7:10pm - 8:10pm,Jawbreaker
-Sunday,2025-09-21,Rebel Stage,11:20am - 11:45am,New Clear Fusion
-Sunday,2025-09-21,Rebel Stage,12:00pm - 12:30pm,Footballhead
-Sunday,2025-09-21,Rebel Stage,12:45pm - 1:15pm,Chase Petra
-Sunday,2025-09-21,Rebel Stage,1:30pm - 2:00pm,Delta Sleep
-Sunday,2025-09-21,Rebel Stage,2:30pm - 3:30pm,"The Ataris (Album Play: So Long, Astoria)"
-Sunday,2025-09-21,Rebel Stage,4:00pm - 4:30pm,Hanson
-Sunday,2025-09-21,Rebel Stage,5:00pm - 5:30pm,Gym Class Heroes
-Sunday,2025-09-21,Rebel Stage,6:00pm - 6:45pm,Cobra Starship
-Sunday,2025-09-21,Rebel Stage,7:15pm - 8:15pm,The Academy Is… (Album Play: Almost Here)
-Sunday,2025-09-21,Rise/Weird Al Stage,12:30pm - 1:00pm,Dune Rats
-Sunday,2025-09-21,Rise/Weird Al Stage,1:40pm - 2:25pm,Smoking Popes (Album Play: Born to Quit)
-Sunday,2025-09-21,Rise/Weird Al Stage,3:05pm - 3:35pm,Lambrini Girls
-Sunday,2025-09-21,Rise/Weird Al Stage,4:15pm - 4:45pm,Microwave
-Sunday,2025-09-21,Rise/Weird Al Stage,5:35pm - 6:20pm,The Wonder Years
-Sunday,2025-09-21,Rise/Weird Al Stage,7:15pm - 8:15pm,Inhaler
-Sunday,2025-09-21,Radical Stage,12:00pm - 12:30pm,Weakened Friends
-Sunday,2025-09-21,Radical Stage,1:05pm - 1:35pm,Quannnic
-Sunday,2025-09-21,Radical Stage,2:30pm - 3:00pm,Soft Play
-Sunday,2025-09-21,Radical Stage,3:40pm - 4:10pm,Ovlov
-Sunday,2025-09-21,Radical Stage,4:50pm - 5:30pm,Dehd
-Sunday,2025-09-21,Radical Stage,6:25pm - 7:10pm,Texas Is the Reason
+Day,Date,Stage,Time,Artist,Description
+Friday,2026-09-18,Riot Stage,12:00pm - 12:30pm,Cardinals,
+Friday,2026-09-18,Riot Stage,1:10pm - 1:40pm,JMSN,
+Friday,2026-09-18,Riot Stage,2:20pm - 2:50pm,Violet Grohl,
+Friday,2026-09-18,Riot Stage,3:30pm - 4:00pm,The Paradox,
+Friday,2026-09-18,Riot Stage,4:40pm - 5:20pm,Joey Valence & Brae,
+Friday,2026-09-18,Riot Stage,6:30pm - 7:30pm,The All-American Rejects,
+Friday,2026-09-18,Riot Stage,8:40pm - 10:00pm,Twenty One Pilots,
+Friday,2026-09-18,Roots Stage,12:35pm - 1:05pm,Teen Mortgage,
+Friday,2026-09-18,Roots Stage,1:45pm - 2:15pm,Fleshwater,
+Friday,2026-09-18,Roots Stage,2:55pm - 3:25pm,3OH!3,
+Friday,2026-09-18,Roots Stage,4:05pm - 4:35pm,Bayside,
+Friday,2026-09-18,Roots Stage,5:25pm - 6:25pm,Alkaline Trio,
+Friday,2026-09-18,Roots Stage,7:35pm - 8:35pm,Rise Against,
+Friday,2026-09-18,Rebel Stage,12:15pm - 12:45pm,Glixen,
+Friday,2026-09-18,Rebel Stage,1:15pm - 1:45pm,División Minúscula,
+Friday,2026-09-18,Rebel Stage,2:15pm - 2:45pm,Radio Free Alice,
+Friday,2026-09-18,Rebel Stage,3:15pm - 4:00pm,Tricky,
+Friday,2026-09-18,Rebel Stage,4:45pm - 5:25pm,Motion City Soundtrack,
+Friday,2026-09-18,Rebel Stage,6:15pm - 7:15pm,Santigold,
+Friday,2026-09-18,Rebel Stage,8:15pm - 9:15pm,Pixies,
+Friday,2026-09-18,Rise Stage,12:30pm - 1:00pm,Panic Shack,
+Friday,2026-09-18,Rise Stage,1:30pm - 2:00pm,Soul Glo,
+Friday,2026-09-18,Rise Stage,2:30pm - 3:00pm,Mariachi El Bronx,
+Friday,2026-09-18,Rise Stage,3:30pm - 4:00pm,Bratmobile,
+Friday,2026-09-18,Rise Stage,4:30pm - 5:00pm,Guttermouth,
+Friday,2026-09-18,Rise Stage,5:30pm - 6:15pm,Slick Rick,
+Friday,2026-09-18,Rise Stage,7:00pm - 8:00pm,Sex Pistols feat. Frank Carter,"Steve Jones, Paul Cook, Glen Matlock"
+Friday,2026-09-18,Rise Stage,8:45pm - 9:45pm,Iggy Pop,
+Friday,2026-09-18,Radical Stage,12:15pm - 12:45pm,Almost There But Not Really,
+Friday,2026-09-18,Radical Stage,1:15pm - 1:45pm,Greet Death,
+Friday,2026-09-18,Radical Stage,2:15pm - 2:45pm,Slothrust,
+Friday,2026-09-18,Radical Stage,3:15pm - 3:45pm,Worry Club,
+Friday,2026-09-18,Radical Stage,4:15pm - 4:45pm,Stephen Egerton,
+Friday,2026-09-18,Radical Stage,5:15pm - 5:45pm,The Callous Daoboys,
+Friday,2026-09-18,Radical Stage,6:15pm - 6:45pm,DeathbyRomy,
+Friday,2026-09-18,Radical Stage,7:15pm - 7:45pm,Foxy Shazam,
+Friday,2026-09-18,Radical Stage,8:55pm - 9:55pm,GWAR,
+Saturday,2026-09-19,Riot Stage,12:30pm - 1:00pm,ASAVA,
+Saturday,2026-09-19,Riot Stage,1:35pm - 2:05pm,Melt-Banana,
+Saturday,2026-09-19,Riot Stage,2:45pm - 3:15pm,Angine de Poitrine,
+Saturday,2026-09-19,Riot Stage,4:05pm - 4:45pm,Public Image Ltd,
+Saturday,2026-09-19,Riot Stage,5:55pm - 6:55pm,Social Distortion,
+Saturday,2026-09-19,Riot Stage,8:20pm - 10:00pm,Tool,
+Saturday,2026-09-19,Roots Stage,12:00pm - 12:30pm,Kiwi Jr.,
+Saturday,2026-09-19,Roots Stage,1:00pm - 1:30pm,Yard Act,
+Saturday,2026-09-19,Roots Stage,2:10pm - 2:40pm,Brian Fallon,
+Saturday,2026-09-19,Roots Stage,3:20pm - 4:00pm,Bright Eyes,
+Saturday,2026-09-19,Roots Stage,4:50pm - 5:50pm,Sugar,
+Saturday,2026-09-19,Roots Stage,7:00pm - 8:15pm,Morrissey,
+Saturday,2026-09-19,Rebel Stage,12:05pm - 12:35pm,NOBRO,
+Saturday,2026-09-19,Rebel Stage,1:00pm - 1:30pm,Strike Anywhere,
+Saturday,2026-09-19,Rebel Stage,1:55pm - 2:25pm,The Chats,
+Saturday,2026-09-19,Rebel Stage,2:55pm - 3:25pm,Destroy Boys,
+Saturday,2026-09-19,Rebel Stage,3:50pm - 4:30pm,Thrice,
+Saturday,2026-09-19,Rebel Stage,4:55pm - 5:55pm,Descendents,Album play: Everything Sucks
+Saturday,2026-09-19,Rebel Stage,7:20pm - 8:20pm,Bad Religion,
+Saturday,2026-09-19,Rise Stage,12:00pm - 12:30pm,Whispers,
+Saturday,2026-09-19,Rise Stage,1:00pm - 1:30pm,Show Me the Body,
+Saturday,2026-09-19,Rise Stage,2:00pm - 2:50pm,The Suicide Machines,Album play: Destruction by Definition
+Saturday,2026-09-19,Rise Stage,3:20pm - 4:00pm,Less Than Jake,
+Saturday,2026-09-19,Rise Stage,4:30pm - 5:15pm,PUP,Album play: The Dream Is Over
+Saturday,2026-09-19,Rise Stage,6:30pm - 7:30pm,Gogol Bordello,
+Saturday,2026-09-19,Rise Stage,9:00pm - 10:00pm,Nas,
+Saturday,2026-09-19,Radical Stage,12:00pm - 12:30pm,Aim High,
+Saturday,2026-09-19,Radical Stage,12:45pm - 1:15pm,The Iron Roses,
+Saturday,2026-09-19,Radical Stage,1:45pm - 2:15pm,Burning Airlines,
+Saturday,2026-09-19,Radical Stage,2:45pm - 3:15pm,Hot Rod Circuit,
+Saturday,2026-09-19,Radical Stage,3:45pm - 4:15pm,Gurriers,
+Saturday,2026-09-19,Radical Stage,4:45pm - 5:15pm,Frankie & the Witch Fingers,
+Saturday,2026-09-19,Radical Stage,5:45pm - 6:15pm,Vana,
+Saturday,2026-09-19,Radical Stage,6:45pm - 7:30pm,Chat Pile,
+Saturday,2026-09-19,Radical Stage,8:00pm - 9:00pm,Afroman,
+Sunday,2026-09-20,Riot Stage,12:40pm - 1:10pm,Stomach Book,
+Sunday,2026-09-20,Riot Stage,1:50pm - 2:20pm,Holding Absence,
+Sunday,2026-09-20,Riot Stage,3:00pm - 3:30pm,Arm's Length,
+Sunday,2026-09-20,Riot Stage,4:25pm - 5:05pm,Pennywise,
+Sunday,2026-09-20,Riot Stage,6:15pm - 7:15pm,Taking Back Sunday,Album play: Louder Now
+Sunday,2026-09-20,Riot Stage,8:25pm - 9:55pm,Pierce the Veil,
+Sunday,2026-09-20,Roots Stage,12:05pm - 12:35pm,Remember Sports,
+Sunday,2026-09-20,Roots Stage,1:15pm - 1:45pm,Daisy Grenade,
+Sunday,2026-09-20,Roots Stage,2:25pm - 2:55pm,Sincere Engineer,
+Sunday,2026-09-20,Roots Stage,3:35pm - 4:20pm,The Beths,
+Sunday,2026-09-20,Roots Stage,5:10pm - 6:10pm,The Format,
+Sunday,2026-09-20,Roots Stage,7:20pm - 8:20pm,Alanis Morissette,
+Sunday,2026-09-20,Rebel Stage,12:00pm - 12:30pm,Largemouth,
+Sunday,2026-09-20,Rebel Stage,1:05pm - 1:35pm,Algernon Cadwallader,
+Sunday,2026-09-20,Rebel Stage,2:05pm - 2:35pm,Pretty Girls Make Graves,
+Sunday,2026-09-20,Rebel Stage,3:05pm - 3:45pm,Jejune,
+Sunday,2026-09-20,Rebel Stage,4:15pm - 4:55pm,This Is Lorelei,
+Sunday,2026-09-20,Rebel Stage,5:25pm - 6:00pm,William Shatner,
+Sunday,2026-09-20,Rebel Stage,6:30pm - 7:30pm,Twin Peaks,
+Sunday,2026-09-20,Rise Stage,12:50pm - 1:20pm,Macseal,
+Sunday,2026-09-20,Rise Stage,1:50pm - 2:20pm,Ben Quad,
+Sunday,2026-09-20,Rise Stage,2:50pm - 3:20pm,Saturdays at Your Place,
+Sunday,2026-09-20,Rise Stage,3:50pm - 4:30pm,Cartel,
+Sunday,2026-09-20,Rise Stage,5:00pm - 5:40pm,Mom Jeans,
+Sunday,2026-09-20,Rise Stage,6:10pm - 7:10pm,Patti Smith and Her Band,
+Sunday,2026-09-20,Rise Stage,8:30pm - 9:30pm,Elvis Costello & the Imposters,
+Sunday,2026-09-20,Radical Stage,12:35pm - 1:05pm,Rose of Demise,
+Sunday,2026-09-20,Radical Stage,1:35pm - 2:15pm,Murphy's Law,
+Sunday,2026-09-20,Radical Stage,2:45pm - 3:25pm,Haywire,
+Sunday,2026-09-20,Radical Stage,3:55pm - 4:35pm,Dead to Me,
+Sunday,2026-09-20,Radical Stage,5:05pm - 5:45pm,The Flatliners,
+Sunday,2026-09-20,Radical Stage,6:15pm - 6:55pm,Good Riddance,
+Sunday,2026-09-20,Radical Stage,7:25pm - 8:05pm,Bowling for Soup,
+Sunday,2026-09-20,Radical Stage,8:55pm - 9:55pm,Insane Clown Posse,
