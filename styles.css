@@ -143,9 +143,18 @@ a:focus-visible,
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.4rem;
     font-size: 0.85rem;
     font-weight: 800;
+}
+
+.icon-button > span:first-child {
+    display: grid;
+    width: 1em;
+    height: 1em;
+    place-items: center;
+    line-height: 1;
 }
 
 .icon-button:hover {
@@ -205,6 +214,7 @@ a:focus-visible,
     font-weight: 850;
     cursor: pointer;
     white-space: nowrap;
+    animation: live-now-pulse 1.8s ease-in-out infinite;
 }
 
 .now-button::before {
@@ -215,6 +225,18 @@ a:focus-visible,
     margin-right: 0.4rem;
     border-radius: 50%;
     background: white;
+}
+
+@keyframes live-now-pulse {
+    0%, 100% {
+        box-shadow: 0 0 0 0 rgb(255 90 31 / 0%);
+        transform: scale(1);
+    }
+
+    50% {
+        box-shadow: 0 0 0 0.5rem rgb(255 90 31 / 22%);
+        transform: scale(1.035);
+    }
 }
 
 .stage-filters {
@@ -647,6 +669,13 @@ body.dialog-open {
 .toast-error { border-left-color: var(--danger); }
 
 @media (max-width: 520px) {
+    .icon-button {
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        gap: 0;
+    }
+
     .icon-button span:last-child {
         position: absolute;
         width: 1px;

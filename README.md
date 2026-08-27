@@ -1,6 +1,6 @@
 # Riot Fest Schedule PWA
 
-A dependency-free, mobile-first schedule for the September 19–21, 2025 Riot Fest lineup. It supports installable PWA behavior, offline schedule access, stage filters, favorites, festival-local live status, and keyboard-accessible settings.
+A dependency-free, mobile-first schedule for the current Riot Fest lineup. It supports installable PWA behavior, offline schedule access, stage filters, favorites, festival-local live status, and keyboard-accessible settings.
 
 ## Run locally
 
@@ -16,22 +16,34 @@ No dependency installation or build step is required. JavaScript uses browser AP
 
 ## Schedule data
 
-The app reads `sample-schedule.csv` with these required columns:
+The app reads `sample-schedule.csv` in this format:
 
 ```csv
-Day,Date,Stage,Time,Artist
-Friday,2025-09-19,Riot Stage,3:00pm - 3:40pm,Honey Revenge
-Sunday,2025-09-21,Rebel Stage,2:30pm - 3:30pm,"The Ataris (Album Play: So Long, Astoria)"
+Day,Date,Stage,Time,Artist,Description
+Friday,2026-09-18,Riot Stage,12:00pm - 12:30pm,Cardinals,
+Friday,2026-09-18,Rise Stage,7:00pm - 8:00pm,Sex Pistols feat. Frank Carter,"Steve Jones, Paul Cook, Glen Matlock"
 ```
 
 - `Day` is the human-readable weekday from the published lineup.
 - `Date` must be a valid ISO date in `YYYY-MM-DD` format.
 - `Stage`, `Time`, and `Artist` must not be empty.
+- `Description` may be empty and is not currently displayed.
 - `Time` must be a start and end separated by ` - ` or ` – `; 12-hour AM/PM and 24-hour times are accepted.
 - Standard RFC 4180 quoting is supported, including commas inside quoted fields, doubled quotes, and CRLF line endings.
 - Every row must contain exactly the same number of fields as the header.
 
 Festival days and stage filters are derived from the data. Dates are sorted chronologically and become `Day 1`, `Day 2`, and `Day 3`. The URLs `?day=1`, `?day=2`, and `?day=3` select those derived days. Without a valid query value, the current festival day is selected when the date matches in `America/Chicago`; otherwise the first day is shown.
+
+## Update the schedule next year
+
+1. Grab clear screenshots of every schedule day and stage from [riotfest.com](https://riotfest.com/).
+2. Upload them to an LLM and use this prompt, then save its output as `sample-schedule.csv`:
+
+```text
+Transcribe these Riot Fest schedule screenshots into CSV. Output CSV only, with one performance per row and this exact header:
+Day,Date,Stage,Time,Artist,Description
+Use YYYY-MM-DD dates, time ranges like 12:00pm - 12:30pm, and RFC 4180 quoting for commas or quotes. Leave Description empty when none is shown. Preserve artist and stage names exactly.
+```
 
 ## Favorites and live status
 
@@ -78,7 +90,7 @@ Wrangler authentication must already be configured for the target Cloudflare acc
 ```bash
 npx wrangler pages deploy . \
   --project-name riot-festival-schedule-staging \
-  --branch feat/schedule-reliability-ux
+  --branch your-branch-name
 ```
 
 This creates a staging/preview deployment only. Production uses the separate `riot-festival-schedule` project and is intentionally outside this workflow.
@@ -93,7 +105,7 @@ This creates a staging/preview deployment only. Production uses the separate `ri
 │   └── icon-*x*.png       # Generated PWA raster assets
 ├── index.html             # Application shell and accessible dialog
 ├── manifest.json          # PWA metadata and day shortcuts
-├── sample-schedule.csv    # 2025 lineup data
+├── sample-schedule.csv    # Current lineup data
 ├── styles.css             # Responsive layout and visual states
 ├── sw.js                  # Offline shell and network-first schedule cache
 ├── tests/app.test.js      # Node test suite
