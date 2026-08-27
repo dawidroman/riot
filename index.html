@@ -1,144 +1,112 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Concert Schedule - Riot Fest</title>
-    <meta name="description" content="3-day concert schedule with offline access">
-    <meta name="theme-color" content="#1a1a1a">
-    
-    <!-- PWA Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>Riot Fest Schedule</title>
+    <meta name="description" content="The three-day Riot Fest schedule, available offline.">
+    <meta name="theme-color" content="#ff5a1f">
     <link rel="manifest" href="manifest.json">
-    <link rel="apple-touch-icon" href="icons/icon-192x192.svg">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <a class="skip-link" href="#schedule-content">Skip to schedule</a>
+
     <div class="app">
-        <!-- Header -->
-        <header class="header">
-            <h1 class="title">Riot Fest</h1>
-            <p class="subtitle">3-Day Experience of Bands You Don't Want to See</p>
+        <header class="site-header">
+            <div class="header-content">
+                <div>
+                    <p class="eyebrow">September 19–21, 2025 · Chicago</p>
+                    <h1>Riot Fest</h1>
+                    <p class="subtitle">Three days. One schedule. No signal required.</p>
+                </div>
+                <button class="icon-button" id="about-button" type="button" aria-haspopup="dialog" aria-controls="about-dialog">
+                    <span aria-hidden="true">⚙</span>
+                    <span>About</span>
+                </button>
+            </div>
         </header>
 
-        <!-- Main Content -->
-        <main class="main-content">
-            <div class="schedule-container">
-                <div class="day-header">
-                    <h2 class="day-title" id="current-day">Day 1</h2>
-                    <div class="date-info" id="current-date">Friday, June 14</div>
+        <main class="main-content" id="main-content">
+            <section class="schedule-panel" aria-labelledby="current-day">
+                <div class="schedule-toolbar">
+                    <div class="day-heading">
+                        <div>
+                            <h2 id="current-day">Schedule</h2>
+                            <p id="current-date">Loading festival dates…</p>
+                        </div>
+                        <button class="now-button" id="now-button" type="button" hidden>Live now</button>
+                    </div>
+                    <div class="stage-filters" id="stage-filters" aria-label="Filter schedule by stage"></div>
                 </div>
-                
-                <div class="stage-filters" id="stage-filters">
-                    <!-- Stage filter buttons will be populated by JavaScript -->
+                <div class="schedule-content" id="schedule-content" aria-busy="true">
+                    <div class="state-message">Loading schedule…</div>
                 </div>
-                
-                <div class="schedule-content" id="schedule-content">
-                    <!-- Schedule will be populated by JavaScript -->
-                    <div class="loading">Loading schedule...</div>
-                </div>
-            </div>
+            </section>
         </main>
 
-        <!-- Bottom Navigation -->
-        <nav class="bottom-nav">
-            <button class="nav-item active" data-day="1">
-                <div class="nav-icon">📅</div>
-                <span class="nav-label">Day 1</span>
-            </button>
-            <button class="nav-item" data-day="2">
-                <div class="nav-icon">📅</div>
-                <span class="nav-label">Day 2</span>
-            </button>
-            <button class="nav-item" data-day="3">
-                <div class="nav-icon">📅</div>
-                <span class="nav-label">Day 3</span>
-            </button>
-            <button class="nav-item" data-action="about">
-                <div class="nav-icon">ℹ️</div>
-                <span class="nav-label">About</span>
-            </button>
-        </nav>
-
-        <!-- About Page -->
-        <div class="about-page" id="about-page">
-            <div class="about-content">
-                <div class="about-header">
-                    <h2>About Riot Fest Schedule</h2>
-                    <button class="close-about" id="close-about">✕</button>
-                </div>
-                
-                <div class="about-body">
-                    <div class="about-section">
-                        <h3>🎵 Festival Schedule PWA V1.4</h3>
-                        <p>A modern Progressive Web App for the Riot Fest 3-day concert schedule. Built with offline functionality, real-time updates, and a beautiful mobile-first design.</p>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h3>✨ Features</h3>
-                        <ul>
-                            <li>📱 <strong>PWA Support</strong> - Install on your device</li>
-                            <li>🔴 <strong>Now Playing</strong> - See what's currently live</li>
-                            <li>⭐ <strong>Favorites</strong> - Star your favorite artists</li>
-                            <li>🎭 <strong>Stage Filters</strong> - Filter by stage or favorites</li>
-                            <li>📱 <strong>Offline Access</strong> - Works without internet</li>
-                            <li>⚡ <strong>Real-time Updates</strong> - Always current</li>
-                        </ul>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h3>☕ Support the Developer</h3>
-                        <p>If you enjoy this app, consider supporting its development:</p>
-                        <a href="https://ko-fi.com/droman" target="_blank" rel="noopener" class="kofi-button">
-                            <span class="kofi-icon">☕</span>
-                            Buy me a coffee on Ko-fi
-                        </a>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h3>🔄 Force Refresh</h3>
-                        <p>Clear all cache and reload the latest data from the server (preserves favorites):</p>
-                        <button class="force-refresh-btn" id="force-refresh-btn">
-                            <span class="refresh-icon">🔄</span>
-                            Force Refresh
-                        </button>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h3>⭐ Clear Favorites</h3>
-                        <p>Remove all starred artists from your favorites list:</p>
-                        <button class="clear-favorites-btn" id="clear-favorites-btn">
-                            <span class="star-icon">⭐</span>
-                            Clear Favorites
-                        </button>
-                    </div>
-                    
-                    <div class="about-section">
-                        <h3>📱 Installation</h3>
-                        <p><strong>iOS:</strong> Tap Share → Add to Home Screen</p>
-                        <p><strong>Android:</strong> Look for "Install" in your browser(Chromium based) menu</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Floating Action Button for Now Playing -->
-        <button class="fab-now-playing" id="fab-now-playing" aria-label="Scroll to now playing" title="Scroll to now playing">
-            🔴 Now
-        </button>
-
-        <!-- PWA Install Prompt will be dynamically created -->
+        <nav class="bottom-nav" id="day-navigation" aria-label="Festival days"></nav>
     </div>
 
-    <!-- Scripts -->
+    <div class="dialog-backdrop" id="about-dialog" hidden>
+        <section class="dialog" role="dialog" aria-modal="true" aria-labelledby="about-title" aria-describedby="about-description" tabindex="-1">
+            <header class="dialog-header">
+                <div>
+                    <p class="eyebrow">Settings & information</p>
+                    <h2 id="about-title">About Riot Fest Schedule</h2>
+                </div>
+                <button class="dialog-close" id="close-about" type="button" aria-label="Close About dialog">×</button>
+            </header>
+            <div class="dialog-body">
+                <section class="about-section">
+                    <h3>Schedule PWA 1.5.0</h3>
+                    <p id="about-description">A fast, installable festival schedule with favorites, live status, and offline access.</p>
+                </section>
+
+                <section class="about-section" aria-labelledby="updates-heading">
+                    <h3 id="updates-heading">Schedule updates</h3>
+                    <p>The app checks the published CSV and keeps the last successful version available offline.</p>
+                    <p class="settings-status" id="dialog-network-status">Connection status unavailable</p>
+                    <p class="settings-status" id="dialog-last-update">No network update recorded</p>
+                    <button class="primary-button" id="check-updates-button" type="button">Check for schedule updates</button>
+                </section>
+
+                <section class="about-section" aria-labelledby="favorites-heading">
+                    <h3 id="favorites-heading">Favorites</h3>
+                    <p>Favorites stay on this device and are preserved across app updates.</p>
+                    <button class="secondary-button" id="clear-favorites-button" type="button">Clear all favorites</button>
+                </section>
+
+                <section class="about-section" aria-labelledby="install-heading">
+                    <h3 id="install-heading">Install</h3>
+                    <p>When your browser supports installation, an install offer will appear automatically. On iOS, use Share → Add to Home Screen.</p>
+                </section>
+
+                <section class="about-section">
+                    <h3>Support</h3>
+                    <a class="support-link" href="https://ko-fi.com/droman" target="_blank" rel="noopener">Buy the developer a coffee <span aria-hidden="true">↗</span></a>
+                </section>
+            </div>
+        </section>
+    </div>
+
+    <aside class="install-promotion" id="install-promotion" aria-labelledby="install-title" hidden>
+        <div>
+            <h2 id="install-title">Install the schedule</h2>
+            <p>Keep it one tap away and ready offline.</p>
+        </div>
+        <div class="install-actions">
+            <button class="primary-button" id="install-button" type="button">Install</button>
+            <button class="dismiss-button" id="dismiss-install" type="button" aria-label="Dismiss install offer">×</button>
+        </div>
+    </aside>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+    <div class="visually-hidden" id="app-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
     <script src="app.js"></script>
 </body>
 </html>

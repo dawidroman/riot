@@ -1,144 +1,101 @@
 # Riot Fest Schedule PWA
 
-A modern Progressive Web App for displaying a 3-day concert schedule with offline functionality.
+A dependency-free, mobile-first schedule for the September 19–21, 2025 Riot Fest lineup. It supports installable PWA behavior, offline schedule access, stage filters, favorites, festival-local live status, and keyboard-accessible settings.
 
-## Features
+## Run locally
 
-- 📱 **PWA Support**: Installable on mobile devices with offline access
-- 🎵 **3-Day Schedule**: Easy navigation between concert days
-- 📊 **CSV Loading**: Automatically loads schedule data from CSV file
-- 🎨 **Modern Design**: Beautiful, responsive UI with dark theme
-- 📍 **Map Integration**: Placeholder for venue map functionality
-- ⚡ **Fast Loading**: Optimized for performance and offline use
+The app loads its CSV with `fetch`, so serve the repository over HTTP instead of opening `index.html` as a local file:
 
-## Getting Started
+```bash
+python3 -m http.server 8000
+```
 
-1. **Open the app**: Simply open `index.html` in a web browser
-2. **Schedule loads automatically**: The app fetches `sample-schedule.csv` automatically
-3. **Navigate**: Use the bottom tab bar to switch between days
-4. **Install**: Add to home screen on mobile devices for app-like experience
+Then open `http://localhost:8000`. To exercise service-worker behavior, use `localhost` or HTTPS.
 
-## CSV Format
+No dependency installation or build step is required. JavaScript uses browser APIs and the tests use Node's built-in test runner.
 
-Your CSV file should include the following columns:
+## Schedule data
+
+The app reads `sample-schedule.csv` with these required columns:
 
 ```csv
 Day,Date,Stage,Time,Artist
-Friday,September 19,Rise Stage,3:05pm - 3:35pm,Lambrini Girls
-Saturday,September 20,Main Stage,6:30pm - 7:00pm,The Electric Storm
+Friday,2025-09-19,Riot Stage,3:00pm - 3:40pm,Honey Revenge
+Sunday,2025-09-21,Rebel Stage,2:30pm - 3:30pm,"The Ataris (Album Play: So Long, Astoria)"
 ```
 
-### Required Columns:
-- `Day`: Day name (Friday, Saturday, Sunday, or Day 1, Day 2, Day 3)
-- `Date`: Event date (e.g., "September 19")
-- `Stage`: Venue/stage name
-- `Time`: Event time range with AM/PM (e.g., "3:05pm - 3:35pm")
-- `Artist`: Artist/band name
+- `Day` is the human-readable weekday from the published lineup.
+- `Date` must be a valid ISO date in `YYYY-MM-DD` format.
+- `Stage`, `Time`, and `Artist` must not be empty.
+- `Time` must be a start and end separated by ` - ` or ` – `; 12-hour AM/PM and 24-hour times are accepted.
+- Standard RFC 4180 quoting is supported, including commas inside quoted fields, doubled quotes, and CRLF line endings.
+- Every row must contain exactly the same number of fields as the header.
 
-### Supported Day Formats:
-- Day names: "Friday", "Saturday", "Sunday"
-- Day numbers: "Day 1", "Day 2", "Day 3"
-- Numeric: "1", "2", "3"
+Festival days and stage filters are derived from the data. Dates are sorted chronologically and become `Day 1`, `Day 2`, and `Day 3`. The URLs `?day=1`, `?day=2`, and `?day=3` select those derived days. Without a valid query value, the current festival day is selected when the date matches in `America/Chicago`; otherwise the first day is shown.
 
-## File Structure
+## Favorites and live status
 
-```
-riot/
-├── index.html          # Main HTML file
-├── styles.css          # CSS styles
-├── app.js             # JavaScript application logic
-├── manifest.json      # PWA manifest
-├── sw.js              # Service worker for offline functionality
-├── sample-schedule.csv # Example CSV file
-├── icons/             # PWA icons (to be added)
-└── README.md          # This file
-```
+Favorites remain in the existing `riot-festival-favorites` local-storage key. Live, upcoming, and finished states compare both the event's ISO date and its time in `America/Chicago`; an event is live from its start minute up to, but not including, its end minute.
 
-## PWA Features
+## Offline and updates
 
-- **Offline Access**: Works without internet connection
-- **Installable**: Can be installed on mobile devices
-- **Responsive**: Optimized for all screen sizes
-- **Fast**: Cached resources for quick loading
+Service worker version 1.5.0 installs the local app shell as one versioned cache. Schedule requests use network-first behavior:
 
-## Browser Support
+1. A successful network response is shown and saved for offline use.
+2. If the network fails, the most recently saved CSV is returned.
+3. If no saved CSV exists, the UI presents an explicit unavailable/offline state.
 
-- Chrome/Edge (recommended)
-- Firefox
-- Safari (iOS 11.3+)
-- Samsung Internet
+“Check for schedule updates” requests a service-worker update and then fetches the CSV without the HTTP cache. It does not delete caches, unregister the service worker, clear storage, or reload the page. The last confirmed network fetch is stored separately as `riot-festival-last-schedule-update`; cached responses never advance it.
 
-## Development
+The install promotion appears only after the browser fires `beforeinstallprompt`. iOS users can install through Share → Add to Home Screen.
 
-To modify the app:
+## Validation
 
-1. Edit the HTML structure in `index.html`
-2. Update styles in `styles.css`
-3. Modify functionality in `app.js`
-4. Update PWA settings in `manifest.json`
-
-## Adding Icons
-
-To complete the PWA setup, add icon files to the `icons/` directory:
-
-- icon-72x72.png
-- icon-96x96.png
-- icon-128x128.png
-- icon-144x144.png
-- icon-152x152.png
-- icon-192x192.png
-- icon-384x384.png
-- icon-512x512.png
-
-## Deployment
-
-This PWA is configured for deployment with Cloudflare Workers/Pages.
-
-### Prerequisites
-
-1. Install Wrangler CLI:
-   ```bash
-   npm install -g wrangler
-   ```
-
-2. Login to Cloudflare:
-   ```bash
-   wrangler login
-   ```
-
-### Deploy Commands
+Run the dependency-free automated checks:
 
 ```bash
-# Install dependencies
-npm install
-
-# Deploy to staging
-npm run deploy:staging
-
-# Deploy to production
-npm run deploy:production
-
-# Or use wrangler directly
-wrangler pages deploy .
+node --check app.js
+node --check sw.js
+node --test tests/*.test.js
+git diff --check
 ```
 
-### Environment Setup
+The tests cover quoted and malformed CSV input, row validation, time parsing, stable sorting, timezone/date-aware live status, time boundaries, and URL day selection.
 
-- **Staging**: `riot-festival-schedule-staging`
-- **Production**: `riot-festival-schedule`
+For a manual browser pass, verify:
 
-The app will be available at:
-- Staging: `https://riot-festival-schedule-staging.pages.dev`
-- Production: `https://riot-festival-schedule.pages.dev`
+- keyboard focus is trapped inside About, Escape closes it, and focus returns to the About button;
+- favorite state persists after reload and focus remains usable after toggling;
+- the toolbar remains sticky and stage filters scroll horizontally on a narrow viewport;
+- online/offline, empty, error, and cached-schedule states are understandable;
+- the “Live now” shortcut appears only while viewing the active festival day;
+- install promotion remains hidden unless the browser provides a real install prompt.
 
-### Features After Deployment
+## Deploy to Cloudflare Pages
 
-- ✅ **PWA Installation**: Users can install on mobile devices
-- ✅ **Offline Functionality**: Works without internet connection
-- ✅ **Fast Global CDN**: Served from Cloudflare's edge network
-- ✅ **HTTPS**: Automatic SSL certificate
-- ✅ **Custom Domain**: Can be configured in Cloudflare dashboard
+Wrangler authentication must already be configured for the target Cloudflare account. Deploy this directory to the staging Pages project with the branch named explicitly:
 
-## License
+```bash
+npx wrangler pages deploy . \
+  --project-name riot-festival-schedule-staging \
+  --branch feat/schedule-reliability-ux
+```
 
-This project is open source and available under the MIT License.
+This creates a staging/preview deployment only. Production uses the separate `riot-festival-schedule` project and is intentionally outside this workflow.
+
+## Project structure
+
+```text
+.
+├── app.js                 # Parsing, schedule logic, rendering, and interactions
+├── icons/
+│   ├── icon.svg           # Code-native icon source
+│   └── icon-*x*.png       # Generated PWA raster assets
+├── index.html             # Application shell and accessible dialog
+├── manifest.json          # PWA metadata and day shortcuts
+├── sample-schedule.csv    # 2025 lineup data
+├── styles.css             # Responsive layout and visual states
+├── sw.js                  # Offline shell and network-first schedule cache
+├── tests/app.test.js      # Node test suite
+└── wrangler.toml          # Cloudflare configuration
+```

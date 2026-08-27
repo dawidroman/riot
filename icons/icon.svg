@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Riot Fest Schedule</title>
+  <desc id="description">A bold RF monogram on a punk-inspired orange calendar.</desc>
+
+  <rect width="512" height="512" rx="104" fill="#ff541f"/>
+  <path fill="#e83c0d" d="M0 354 354 0h86L0 440v-86Zm72 158L512 72v88L160 512H72Z" opacity=".55"/>
+
+  <rect x="72" y="76" width="368" height="364" rx="58" fill="#111113"/>
+  <rect x="92" y="96" width="328" height="324" rx="39" fill="#fff2dc"/>
+  <path fill="#111113" d="M131 96h250c22 0 39 17 39 39v72H92v-72c0-22 17-39 39-39Z"/>
+
+  <path fill="#fff2dc" d="M143 63h34v67h-34zm96 0h34v67h-34zm96 0h34v67h-34z"/>
+  <circle cx="160" cy="132" r="10" fill="#ff541f"/>
+  <circle cx="256" cy="132" r="10" fill="#ff541f"/>
+  <circle cx="352" cy="132" r="10" fill="#ff541f"/>
+
+  <path fill="#111113" fill-rule="evenodd" d="M125 239h67c46 0 72 20 72 57 0 24-13 42-36 51l43 63h-50l-35-55h-18v55h-43V239Zm43 36v46h22c20 0 30-8 30-23 0-16-10-23-30-23h-22Z"/>
+  <path fill="#111113" d="M285 239h112v38h-69v31h61v37h-61v65h-43V239Z"/>
+
+  <path fill="#ffd23f" stroke="#111113" stroke-linejoin="round" stroke-width="10" d="m405 368 13 24 27 5-19 20 4 28-25-12-25 12 4-28-19-20 27-5 13-24Z"/>
+</svg>
